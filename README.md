@@ -1,10 +1,8 @@
-# Firebase Authentication Kit for React Native
+# Firebase Authentication Example for React Native
 
-Thank you for trying the Firebase Authentication Kit 👏
+Thank you for trying the Firebase Authentication example 👏
 
-**Please note that no support is offered for this kit though we will happily accept PRs.**
-
-It was previously available for purchase and has been open-sourced with the sole intention of helping interested people by making the code available.
+**Please note that limited support is offered for this example though we will happily accept PRs.**
 
 ## Getting started
 
