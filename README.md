@@ -4,6 +4,26 @@ Thank you for trying the Firebase Authentication example 👏
 
 **Please note that limited support is offered for this example though we will happily accept PRs.**
 
+The following authentication features are ready for use in this example:
+
+ - Sign In
+ - Sign Out
+ - Create account
+ - Forgot Password
+ - Sign in with social auth providers
+ - Sign in with phone auth (with country selection)
+ - Linking social profiles
+ - Change Password
+ - Email verification
+ - Updating user profile
+
+and the following providers:
+
+ - Email / Password Sign In
+ - Facebook
+ - Google
+ - Phone Auth via SMS
+
 ## Getting started
 
 Ensure your development environment is set up for React Native by following the [React Native documentation](https://reactnative.dev/docs/environment-setup).
