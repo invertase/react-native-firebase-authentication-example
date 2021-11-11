@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FirebaseAuthenticationKit</string>
+    <string name="facebook_app_id">changeme</string>
+    <string name="fb_login_protocol_scheme"></string>
+    <!-- [android] facebook_app_id -->
+    <!-- [android] fb_login_protocol_scheme -->
+</resources>

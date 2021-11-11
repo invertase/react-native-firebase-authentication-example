@@ -1,0 +1,58 @@
+{
+  "name": "react-native-firebase-authentication-example",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "rename-project": "node scripts/rename.js",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "@invertase/react-native-apple-authentication": "^2.1.5",
+    "@react-native-community/masked-view": "^0.1.1",
+    "@react-native-firebase/app": "^13.0.1",
+    "@react-native-firebase/auth": "^13.0.1",
+    "@react-native-firebase/firestore": "^13.0.1",
+    "@react-native-google-signin/google-signin": "^7.0.1",
+    "@react-navigation/core": "^6.1.0",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/stack": "^6.0.11",
+    "dayjs": "^1.10.7",
+    "libphonenumber-js": "^1.9.42",
+    "react": "17.0.2",
+    "react-native": "0.66.2",
+    "react-native-country-picker-modal": "^2.0.0",
+    "react-native-fbsdk-next": "^4.6.0",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-paper": "^4.10.0",
+    "react-native-reanimated": "^2.2.3",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.9.0",
+    "react-native-vector-icons": "^9.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/runtime": "^7.16.0",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "@types/react-native": "^0.66.2",
+    "@types/react-native-vector-icons": "^6.4.9",
+    "babel-jest": "^27.3.1",
+    "eslint": "^7.14.0",
+    "fs-extra": "^10.0.0",
+    "jest": "^27.3.1",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-test-renderer": "17.0.2",
+    "replace-in-file": "^6.3.2",
+    "typescript": "^4.4.4"
+  },
+  "resolutions": {
+    "@types/react": "^17"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
