@@ -22,7 +22,7 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/no-var-requires': 'off',
-    indent: ['error', 2],
+    indent: ['error', 2, {SwitchCase: 1}],
     'linebreak-style': ['error', 'unix'], // https://adaptivepatchwork.com/2012/03/01/mind-the-end-of-your-line/
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
@@ -30,6 +30,15 @@ module.exports = {
     'react/display-name': 'off',
     'react/no-unescaped-entities': 'off',
     'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    'no-tabs': ['error', {allowIndentationTabs: true}],
+    'max-len': [
+      'error',
+      {
+        code: 110,
+        tabWidth: 2,
+        ignoreUrls: true
+      }
+    ]
   }
 };

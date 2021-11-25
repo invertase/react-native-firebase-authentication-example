@@ -8,6 +8,7 @@ const {
   ESLINT_MODES,
   POSTCSS_MODES
 } = require('@craco/craco');
+const path = require('path');
 
 module.exports = {
   // reactScriptsVersion: 'react-scripts' /* (default value) */,
@@ -98,7 +99,18 @@ module.exports = {
   //   enableTypeChecking: true /* (default value)  */
   // },
   webpack: {
-    alias: {},
+    alias: {
+      ['@invertase/react-native-apple-authentication$']: path.resolve(
+        __dirname,
+        'src/shims/react-native-apple-authentication-web.ts'
+      ),
+      ['@react-native-firebase/app$']: path.resolve(__dirname, 'src/shims/firebase-app-web.ts'),
+      ['@react-native-firebase/analytics$']: path.resolve(__dirname, 'src/shims/firebase-analytics-web.ts'),
+      ['@react-native-firebase/auth$']: path.resolve(__dirname, 'src/shims/firebase-auth-web.ts'),
+      ['@react-native-firebase/firestore$']: path.resolve(__dirname, 'src/shims/firebase-firestore-web.ts'),
+      ['@react-native-google-signin/google-signin$']: path.resolve(__dirname, 'src/shims/google-signin-web.ts'),
+      ['react-native-fbsdk-next$']: path.resolve(__dirname, 'src/shims/react-native-fbsdk-next-web.ts')
+    },
     plugins: {
       add: [] /* An array of plugins */,
       add: [
