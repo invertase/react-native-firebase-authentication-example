@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {Button, useTheme, withTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/core';
@@ -56,9 +56,9 @@ function SignIn() {
 
         <View style={[styles.divider, {backgroundColor: theme.colors.primary}]} />
 
-        <Facebook />
-        <Google />
-        <Apple />
+        {Platform.OS !== 'web' && <Facebook />}
+        {Platform.OS !== 'web' && <Google />}
+        {Platform.OS !== 'web' && <Apple />}
         <ProviderButton
           type='phone'
           onPress={() => {
