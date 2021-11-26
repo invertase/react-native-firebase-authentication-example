@@ -42,7 +42,7 @@ function EmailPassword(): JSX.Element {
         }}
       />
       <TextInput
-        defaultValue={email}
+        value={email}
         label='Email Address'
         underlineColor='#fff'
         theme={maskTheme}
@@ -55,7 +55,7 @@ function EmailPassword(): JSX.Element {
       <TextInput
         autoCapitalize='none'
         secureTextEntry
-        defaultValue={password}
+        value={password}
         label='Password'
         underlineColor='#fff'
         theme={maskTheme}
