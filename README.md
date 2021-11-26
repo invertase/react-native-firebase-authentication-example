@@ -2,6 +2,11 @@
 
 Thank you for trying the Firebase Authentication example 👏
 
+   ![How-its-going](/docs/assets/hero.png)
+
+   ![See-it-in-action](/docs/assets/RNFBAuthDemo.gif)
+
+
 **Please note that limited support is offered for this example though we will happily accept PRs.**
 
 The following authentication features are ready for use in this example:
