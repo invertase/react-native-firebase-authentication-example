@@ -5,20 +5,22 @@ allowing you to take full advantage of Google's native SDK. Example authenticati
 
 As with all third party authentication providers you will need to configure your project details to use Google's SDK.
 
+Please note, Google authentication is currently only available on native platforms.
+
 ## Configuration
 
 This guide assumes that you have already created your Firebase app and configured your iOS and Android projects as explained in [README](README.md).
 
-To begin, replace the webClientId in `config.json` (found in the root directory of the app) with your own, which is used by the app to call `GoogleSignin.configure`; and is needed whenever that method is called. This ID is automatically generated when you create your Firebase project and you can find it under "Web Application -> Client ID" in your [Google Cloud Console](https://console.developers.google.com/apis/credentials). Make sure you select right project.
+To begin, replace the webClientId in `src/config.json` with your own, which is used by the app to call `GoogleSignin.configure`; and is needed whenever that method is called. This ID is automatically generated when you create your Firebase project and you can find it under "Web Application -> Client ID" in your [Google Cloud Console](https://console.developers.google.com/apis/credentials). Make sure you select right project.
 
 ### IOS
 
 1. Open your project via XCode and navigate to your `GoogleService-Info.plist` file (normally located at `/ios/[YourApp]/Info.plist`). Copy your `REVERSED_CLIENT_ID` from this file.
 
-2. You can add this code manually by globally searching for `<!-- [ios] GoogleURLScheme -->` comment. Alternatively, click on your xcode project icon (blue one) and under Info tab expand `URL Types` panel. Add new url type and under `URL Schema` paste your previously coppied `REVERSED_CLIENT_ID` field value. NOTE: you might see more entries here if you use other social auth providers like Facebook.
+2. Alternatively, click on your xcode project icon (blue one) and under Info tab expand `URL Types` panel. Add new url type and under `URL Schema` paste your previously coppied `REVERSED_CLIENT_ID` field value. NOTE: you might see more entries here if you use other social auth providers like Facebook.
    ![google url type](/docs/assets/google-url-type.png)
 
-3. Run your app and make sure that everything is working. If you run into any trouble it is worth trying to clean your caches and restart XCode.
+3. Run your app and make sure that everything is working. If you run into any trouble it is worth trying to clean your caches and restart XCode (possibly via `npx react-native-clean-project`)
 
 ### Android
 
