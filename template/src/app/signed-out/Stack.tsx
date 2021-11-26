@@ -22,7 +22,7 @@ function SignedOutStack() {
           headerTintColor: theme.colors.accent
         }}
       >
-        <Stack.Screen name='SignIn' component={SignIn} options={{header: undefined}} />
+        <Stack.Screen name='SignIn' component={SignIn} options={{headerShown: false}} />
         <Stack.Screen name='CreateAccount' options={{title: 'Create Account'}} component={CreateAccount} />
         <Stack.Screen name='ForgotPassword' component={ForgotPassword} options={{title: 'Forgot Password'}} />
         <Stack.Screen name='PhoneSignIn' component={PhoneSignIn} />
