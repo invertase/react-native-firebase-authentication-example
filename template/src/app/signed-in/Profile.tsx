@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import React, {useContext} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {Avatar, Caption, FAB, Headline, Subheading, useTheme, Title, withTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/core';
@@ -9,6 +9,7 @@ import Hero from '../components/Hero';
 import Provider from '../components/Provider';
 import Facebook from '../providers/Facebook';
 import Google from '../providers/Google';
+import Apple from '../providers/Apple';
 import {getProviders} from '../util/helpers';
 
 function Profile() {
@@ -66,8 +67,9 @@ function Profile() {
       />
 
       <View style={styles.center}>
-        <Facebook />
-        <Google />
+        {Platform.OS !== 'web' && <Facebook />}
+        {Platform.OS !== 'web' && <Google />}
+        {Platform.OS !== 'web' && <Apple />}
       </View>
     </View>
   );
