@@ -25,6 +25,8 @@ and the following providers:
 - Facebook (Native only, PRs needed for web support)
 - Google (Native only, PRs needed for web support)
 
+This template creates an app that comes out of the box ready with [typescript](https://www.typescriptlang.org/) and [react-native-web](https://necolas.github.io/react-native-web/) support, based on [the Luna template](https://github.com/plaut-ro/luna#readme)
+
 ## Getting started
 
 Ensure your development environment is set up for React Native by following the [React Native documentation](https://reactnative.dev/docs/environment-setup).
