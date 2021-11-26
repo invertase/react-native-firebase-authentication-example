@@ -29,36 +29,36 @@ and the following providers:
 
 Ensure your development environment is set up for React Native by following the [React Native documentation](https://reactnative.dev/docs/environment-setup).
 
-### Install dependencies
+### Create an app using the template
 
-1. Install [NPM](https://www.npmjs.com) dependencies with [Yarn](https://yarnpkg.com/lang/en/): `yarn`.
-2. Install [CocoaPods](https://cocoapods.org) inside of the `ios` directory: `npx pod-install`
+1. For a quick demonstration, this template is pre-configured with a firebase project called `ProjectName`, if you just want to see it work, run `npx react-native init ProjectName --template invertase/react-native-firebase-authentication-example
+1. For a real project, replace `ProjectName` in the init command with your new project's real name, then follow the configuration instructions below
 
 ### Android: Setting up App Signing
 
 Google Sign-In requires a `keystore` file to be added to your project and the Firebase console for both debug and release builds, we've included a `debug` one by default. To setup a new `keystore` file, follow the [guide here](https://developer.android.com/studio/publish/app-signing#debug-mode).
 
-### Add your app id and name
-
-This project is preconfigured with `market.reactnative.firebaseauthkit` as its app id. You will probably want to replace it using the `rename-script` npm script provided with this product.
-
 ### Add your Firebase credentials
 
 1. Choose your existing Firebase project from the [Firebase console](https://console.firebase.google.com/).
    > Creating a new project? Check out the React Native Firebase [documentation](https://rnfirebase.io/#prerequisites).
-2. Add the Firebase credentials to your project by following documentation for [Android](https://rnfirebase.io/#generating-android-credentials) and [iOS](https://rnfirebase.io/#generating-ios-credentials).
-
-**WARNING** The application will _not_ start until you copy your `GoogleServices-Info.plist` file into `./ios/FirebaseAuthenticationKit/` and your `google-services.json` into `./android/app/`. It will install and begin running but then crash immediately as those files are necessary for Firebase to start.
+2. Replace the native Firebase credentials template files to your project by following documentation for [Android](https://rnfirebase.io/#generating-android-credentials) and [iOS](https://rnfirebase.io/#generating-ios-credentials).
+3. Copy the web config from Firebase console into `src/shims/firebase-init.ts`
 
 ### Run the app
 
 - Start the metro javascript bundler: `yarn start`
 - For android: `yarn android`
-- For iOS: `yarn ios`
+- For apple: `yarn ios`
+- For web: `yarn web`
+- For testing (jest): `yarn test:all`
+- For linting (format, lint, typescript): `yarn lint:all`
 
 ## Authentication Providers
 
-The Firebase Authentication Example supports multiple authentication providers. Follow the links below for documentation on setting up each provider:
+The Firebase Authentication Example supports multiple authentication providers.
+
+Follow the links below for documentation on setting up each provider:
 
 - [Apple Authentication](/docs/apple.md)
 - [Email and Password Authentication](/docs/email-password-auth.md)
