@@ -5,6 +5,8 @@ allowing you to take full advantage of Facebook's native SDK. Example authentica
 
 As with all third party authentication providers you will need to configure your project details to use Facebook's SDK.
 
+Please note, Facebook authentication is currently only available on native platforms.
+
 ## Configuration
 
 Before you begin you will need to create a developer account at [Facebook Developer Portal](https://developers.facebook.com) if you haven't done so already.
@@ -24,14 +26,14 @@ Once you have your developer account set up:
 
 4. If you want to allow users to sign in via notifications enable single sign on.
 
-5. You will be given code snippets to add to your [Info.plist](/ios/FirebaseAuthenticationKit/Info.plist) file. To add them:
+5. You will be given code snippets to add to your [Info.plist](/template/ios/ProjectName/Info.plist) file. To add them:
 
-   1. Open your [.xcworkspace](ios/FirebaseAuthenticationKit.xcworkspace) project via XCode.
+   1. Open your [.xcworkspace](ios/ProjectName.xcworkspace) project via XCode.
    2. Locate your `Info.plist` file and right click: `Open As` -> `Source Code`.
       ![xcode-plist](/docs/assets/xcode-info-plist.png)
-   3. Paste in your url type details snippet.
+   3. Replace the template default configuration in your url type details snippet.
       ![xcode-url-schema](/docs/assets/xcode-url-schema.png)
-   4. Any other Info.plist config snippets have already been pre-configured.
+   4. Any other Facebook Info.plist config snippets should be replaced with your new Facebook App Id and Client Token.
    5. NOTE: You don't need to add `-ObjC` flag to your project as all React Native apps already include it.
 
 6. The "Connect AppDelegate" step is not required as auth kit already includes it.
@@ -46,7 +48,7 @@ Once you have your developer account set up:
 
 4. Generate development key hash (as instructed in **Facebook Developer Dashboard**).
 
-5. Add the generated resources to your project, you only need to update [android/app/res/values/strings.xml](android/app/res/values/strings.xml) everything else is already included. You can perform global search for `<!-- [android] facebook_app_id -->` and `<!-- [android] fb_login_protocol_scheme -->` comments to find exact places where these details should be placed.
+5. Add the generated resources, Facebook App ID and Client Token to your project, with an update to [android/app/res/values/strings.xml](template/android/app/res/values/strings.xml) and [android/app/src/main/AndroidManifest.xml](template/android/app/src/main/AndroidManifest.xml) everything else is already included.
    ![android strings](/docs/assets/android-strings.png)
 
 6. The rest of the native implementation is already pre-configured.
