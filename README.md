@@ -6,23 +6,24 @@ Thank you for trying the Firebase Authentication example 👏
 
 The following authentication features are ready for use in this example:
 
- - Sign In
- - Sign Out
- - Create account
- - Forgot Password
- - Sign in with social auth providers
- - Sign in with phone auth (with country selection)
- - Linking social profiles
- - Change Password
- - Email verification
- - Updating user profile
+- Sign In
+- Sign Out
+- Create account
+- Forgot Password
+- Sign in with social auth providers
+- Sign in with phone auth (with country selection)
+- Linking social profiles
+- Change Password
+- Email verification
+- Updating user profile
 
 and the following providers:
 
- - Email / Password Sign In
- - Facebook
- - Google
- - Phone Auth via SMS
+- Email / Password Sign In
+- Phone Auth via SMS
+- Apple (Native, iOS only, PRs needed for web support)
+- Facebook (Native only, PRs needed for web support)
+- Google (Native only, PRs needed for web support)
 
 ## Getting started
 

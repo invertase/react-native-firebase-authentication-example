@@ -7,8 +7,12 @@
 - [React Native Web](https://necolas.github.io/react-native-web/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [React Navigation](https://reactnavigation.org/)
-- [React Native Elements](https://reactnativeelements.com/)
-- [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
+- [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons#readme)
+- [React Native Paper](https://callstack.github.io/react-native-paper/)
+- [React Native Firebase](https://rnfirebase.io)
+- [React Native Facebook SDK](https://github.com/thebergamo/react-native-fbsdk-next#readme)
+- [React Native Google Signin](https://github.com/react-native-google-signin/google-signin#readme)
+- [React Native Apple Authentication](https://github.com/invertase/react-native-apple-authentication#readme)
 
 ## Running the app
 
@@ -37,3 +41,15 @@ Use the app `npx serve -s build/`
 
 1. Check your code style with `yarn lint:all` (runs eslint, prettier, and tsc)
 1. Check your code correctness with `yarn test:all` (runs jest)
+
+## Project Configuration
+
+This project assumes you have followed the configuration instructions provided in [the template README](https://github.com/invertase/react-native-firebase-authentication-example#readme).
+
+Social authentication providers are not currently working on web, but work on native.
+
+PRs welcome to these repositories to add react-native-web support! :pray:
+
+- [React Native Facebook SDK](https://github.com/thebergamo/react-native-fbsdk-next#readme)
+- [React Native Google Signin](https://github.com/react-native-google-signin/google-signin#readme)
+- [React Native Apple Authentication](https://github.com/invertase/react-native-apple-authentication#readme)
