@@ -29,9 +29,8 @@ function EmailPassword(): JSX.Element {
       setError('');
       await auth().signInWithEmailAndPassword(email, password);
     } catch (e) {
-      handleAuthError(e as FirebaseAuthTypes.PhoneAuthError, setError);
-    } finally {
       setLoading(false);
+      handleAuthError(e as FirebaseAuthTypes.PhoneAuthError, setError);
     }
   }
 

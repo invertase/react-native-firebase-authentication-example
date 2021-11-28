@@ -58,13 +58,12 @@ function Apple(): JSX.Element | null {
           }
         }
       } catch (e) {
+        setLoading(false);
         const error = e as FirebaseError;
         // TODO: handle possible cases
         if (error.code !== '1001') {
           Alert.alert('Apple Auth Error', error.message);
         }
-      } finally {
-        setLoading(false);
       }
     }
   }

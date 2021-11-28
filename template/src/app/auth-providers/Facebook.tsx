@@ -53,9 +53,8 @@ function Facebook(): JSX.Element | null {
           }
         }
       } catch (error) {
-        Alert.alert('Facebook Auth Error', (error as Error).message);
-      } finally {
         setLoading(false);
+        Alert.alert('Facebook Auth Error', (error as Error).message);
       }
     }
   }

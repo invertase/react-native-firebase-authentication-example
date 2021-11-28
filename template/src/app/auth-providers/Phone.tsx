@@ -39,10 +39,9 @@ function Phone(): JSX.Element {
         const result = await auth().signInWithPhoneNumber(number);
         confirmationRef.current = result.confirm.bind(result);
       } catch (error) {
+        setLoading(false);
         confirmationRef.current = null;
         Alert.alert('Phone Auth Error', (error as Error).message);
-      } finally {
-        setLoading(false);
       }
     }
   }

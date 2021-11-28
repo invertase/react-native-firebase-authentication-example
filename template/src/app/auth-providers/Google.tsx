@@ -44,6 +44,7 @@ function Google(): JSX.Element | null {
           }
         }
       } catch (e) {
+        setLoading(false);
         const error = e as FirebaseError;
         switch (error.code) {
           case statusCodes.SIGN_IN_CANCELLED:
@@ -68,8 +69,6 @@ function Google(): JSX.Element | null {
                 return Alert.alert('Google Auth Error', error.message);
             }
         }
-      } finally {
-        setLoading(false);
       }
     }
   }
