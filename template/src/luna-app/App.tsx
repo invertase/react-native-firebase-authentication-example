@@ -59,7 +59,7 @@ const Section: React.FC<{
   );
 };
 
-const App = () => {
+export const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -135,12 +135,10 @@ const TopTabNavigator = () => {
   };
 
   return (
-    <SafeAreaProvider style={backgroundStyle}>
-      <Tab.Navigator initialRouteName="Home" screenOptions={screenOptions}>
-        <Tab.Screen component={App} key={'Home'} name={'Home'} />
-        <Tab.Screen component={DetailsTab} key={'Details'} name={'Details'} />
-      </Tab.Navigator>
-    </SafeAreaProvider>
+    <Tab.Navigator initialRouteName="Home" screenOptions={screenOptions}>
+      <Tab.Screen component={App} key={'Home'} name={'Home'} />
+      <Tab.Screen component={DetailsTab} key={'Details'} name={'Details'} />
+    </Tab.Navigator>
   );
 };
 

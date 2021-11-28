@@ -1,4 +1,3 @@
-import {BaseNavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useTheme, withTheme} from 'react-native-paper';
 import CreateAccount from './CreateAccount';
@@ -12,36 +11,34 @@ function SignedOutStack() {
   const theme = useTheme();
 
   return (
-    <BaseNavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: theme.colors.primary,
-          },
-          headerTintColor: theme.colors.accent,
-        }}>
-        <Stack.Screen
-          name="SignIn"
-          component={SignIn}
-          options={{headerShown: false, title: 'Sign In'}}
-        />
-        <Stack.Screen
-          name="CreateAccount"
-          options={{title: 'Create Account'}}
-          component={CreateAccount}
-        />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPassword}
-          options={{title: 'Forgot Password'}}
-        />
-        <Stack.Screen
-          name="PhoneSignIn"
-          component={PhoneSignIn}
-          options={{title: 'Phone Sign In'}}
-        />
-      </Stack.Navigator>
-    </BaseNavigationContainer>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme.colors.primary,
+        },
+        headerTintColor: theme.colors.accent,
+      }}>
+      <Stack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{headerShown: false, title: 'Sign In'}}
+      />
+      <Stack.Screen
+        name="CreateAccount"
+        options={{title: 'Create Account'}}
+        component={CreateAccount}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
+        options={{title: 'Forgot Password'}}
+      />
+      <Stack.Screen
+        name="PhoneSignIn"
+        component={PhoneSignIn}
+        options={{title: 'Phone Sign In'}}
+      />
+    </Stack.Navigator>
   );
 }
 

@@ -37,6 +37,9 @@ function ForgotPassword(): JSX.Element {
         Enter your email address below to send a password reset email:
       </Paragraph>
       <TextInput
+        autoFocus={true}
+        value={email}
+        autoCapitalize={'none'}
         style={styles.input}
         mode="outlined"
         label="Email Address"

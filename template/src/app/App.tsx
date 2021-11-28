@@ -6,6 +6,8 @@ import {Provider} from 'react-native-paper';
 import theme from './theme';
 import SignedInStack from './signed-in/Stack';
 import SignedOutStack from './signed-out/Stack';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native';
 
 /**
  * Types
@@ -63,7 +65,13 @@ function App(): JSX.Element {
   }
 
   function container(children: ReactNode | ReactNode[]) {
-    return <Provider theme={theme}>{children}</Provider>;
+    return (
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Provider theme={theme}>{children}</Provider>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    );
   }
 
   return container(
