@@ -23,7 +23,7 @@ function SignedOutStack() {
         <Stack.Screen
           name="SignIn"
           component={SignIn}
-          options={{headerShown: false}}
+          options={{headerShown: false, title: 'Sign In'}}
         />
         <Stack.Screen
           name="CreateAccount"
@@ -35,7 +35,11 @@ function SignedOutStack() {
           component={ForgotPassword}
           options={{title: 'Forgot Password'}}
         />
-        <Stack.Screen name="PhoneSignIn" component={PhoneSignIn} />
+        <Stack.Screen
+          name="PhoneSignIn"
+          component={PhoneSignIn}
+          options={{title: 'Phone Sign In'}}
+        />
       </Stack.Navigator>
     </BaseNavigationContainer>
   );
