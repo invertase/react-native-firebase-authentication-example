@@ -29,12 +29,14 @@ target 'ProjectName' do
     
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
+        # Optionally disable build warnings in dependencies. There are so many typically, it is a performance problem.
         config.build_settings["GCC_WARN_INHIBIT_ALL_WARNINGS"] = "YES"
       end
     end
     
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
+        # Optionally use "relative" compiler paths. This allows use of ccache if it is in your PATH, which is a huge performance booth..
         config.build_settings["CC"] = "clang"
         config.build_settings["LD"] = "clang"
         config.build_settings["CXX"] = "clang++"

@@ -3,26 +3,33 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
-    jest: true
+    jest: true,
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended'],
+  extends: ['@react-native-community'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 12,
-    sourceType: 'module'
+    sourceType: 'module',
   },
+  overrides: [
+    {
+      files: ['*.ts?'],
+      rules: {
+        'no-undef': 'off',
+      },
+    },
+  ],
   plugins: ['react', '@typescript-eslint', 'prettier'],
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: 'detect',
+    },
   },
   rules: {
     '@typescript-eslint/no-var-requires': 'off',
-    indent: ['error', 2, {SwitchCase: 1}],
     'linebreak-style': ['error', 'unix'], // https://adaptivepatchwork.com/2012/03/01/mind-the-end-of-your-line/
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
@@ -31,14 +38,7 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-    'no-tabs': ['error', {allowIndentationTabs: true}],
-    'max-len': [
-      'error',
-      {
-        code: 110,
-        tabWidth: 2,
-        ignoreUrls: true
-      }
-    ]
-  }
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
+  },
 };
