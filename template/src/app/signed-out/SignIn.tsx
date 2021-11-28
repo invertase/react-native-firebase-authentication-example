@@ -1,7 +1,6 @@
 import {Fragment} from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
 import {Button, useTheme, withTheme} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/core';
 import Hero from '../components/Hero';
 import ProviderButton from '../components/AuthProviderButton';
@@ -23,10 +22,6 @@ function SignIn() {
         }>
         <EmailPassword />
       </Hero>
-
-      <View style={[styles.fab, {backgroundColor: theme.colors.primary}]}>
-        <Icon name="arrow-down" color="#fff" size={23} />
-      </View>
 
       <View style={styles.center}>
         <Button

@@ -1,7 +1,7 @@
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {useEffect, useState} from 'react';
 import {Alert, Image, StyleSheet, View} from 'react-native';
-import {Button, TextInput} from 'react-native-paper';
+import {Button, TextInput, useTheme} from 'react-native-paper';
 import {handleAuthError} from '../util/helpers';
 
 function EmailPassword(): JSX.Element {
@@ -10,6 +10,8 @@ function EmailPassword(): JSX.Element {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const theme = useTheme();
 
   useEffect(() => {
     if (error) {
@@ -33,6 +35,40 @@ function EmailPassword(): JSX.Element {
     }
   }
 
+  const styles = StyleSheet.create({
+    signinButton: {
+      alignSelf: 'center',
+      backgroundColor: theme.colors.primary,
+      width: 300,
+    },
+    icon: {
+      alignSelf: 'center',
+      padding: 10,
+      width: 65,
+      height: 65,
+    },
+    form: {
+      flex: 1,
+      padding: 20,
+      textAlign: 'center',
+      justifyContent: 'center',
+      alignSelf: 'stretch',
+    },
+    button: {
+      marginVertical: 20,
+    },
+  });
+
+  const maskTheme = {
+    dark: true,
+    colors: {
+      text: '#fff',
+      primary: '#fff',
+      background: 'transparent',
+      placeholder: '#fff',
+    },
+  };
+
   return (
     <View style={styles.form}>
       <Image
@@ -42,6 +78,7 @@ function EmailPassword(): JSX.Element {
         }}
       />
       <TextInput
+        autoFocus={true}
         value={email}
         label="Email Address"
         underlineColor="#fff"
@@ -63,7 +100,7 @@ function EmailPassword(): JSX.Element {
         autoComplete="password"
       />
       <Button
-        style={styles.button}
+        style={[styles.button, styles.signinButton]}
         icon="lock"
         mode={loading ? 'text' : 'outlined'}
         onPress={() => (loading ? null : attemptSignIn())}
@@ -74,34 +111,5 @@ function EmailPassword(): JSX.Element {
     </View>
   );
 }
-
-const maskTheme = {
-  dark: true,
-  colors: {
-    text: '#fff',
-    primary: '#fff',
-    background: 'transparent',
-    placeholder: '#fff',
-  },
-};
-
-const styles = StyleSheet.create({
-  icon: {
-    alignSelf: 'center',
-    padding: 10,
-    width: 65,
-    height: 65,
-  },
-  form: {
-    flex: 1,
-    padding: 20,
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignSelf: 'stretch',
-  },
-  button: {
-    marginVertical: 20,
-  },
-});
 
 export default EmailPassword;
