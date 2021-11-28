@@ -25,7 +25,7 @@ function App(): JSX.Element {
 
   /** Listen for auth state changes */
   useEffect(() => {
-    const authListener = auth().onAuthStateChanged((result) => {
+    const authListener = auth().onAuthStateChanged(result => {
       setUser(result);
       if (initializing && !listenUser) {
         setInitializing(false);
@@ -47,7 +47,7 @@ function App(): JSX.Element {
     if (listenUser) {
       // TODO @react-native-firebase/auth provides `onUserChanged` which is this and more.
       // what else can we add and still be web-compatible?
-      userListener = auth().onIdTokenChanged((result) => {
+      userListener = auth().onIdTokenChanged(result => {
         setUser(result);
       });
     }
@@ -74,7 +74,7 @@ function App(): JSX.Element {
       </UserContext.Provider>
     ) : (
       <SignedOutStack />
-    )
+    ),
   );
 }
 

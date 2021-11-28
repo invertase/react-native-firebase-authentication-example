@@ -38,38 +38,37 @@ function EmailPassword(): JSX.Element {
       <Image
         style={styles.icon}
         source={{
-          uri: 'https://storage.googleapis.com/static.invertase.io/assets/React-Native-Firebase.png'
+          uri: 'https://storage.googleapis.com/static.invertase.io/assets/React-Native-Firebase.png',
         }}
       />
       <TextInput
         value={email}
-        label='Email Address'
-        underlineColor='#fff'
+        label="Email Address"
+        underlineColor="#fff"
         theme={maskTheme}
         onChangeText={setEmail}
-        autoCapitalize='none'
+        autoCapitalize="none"
         autoCorrect={false}
-        keyboardType='email-address'
-        autoComplete='email'
+        keyboardType="email-address"
+        autoComplete="email"
       />
       <TextInput
-        autoCapitalize='none'
+        autoCapitalize="none"
         secureTextEntry
         value={password}
-        label='Password'
-        underlineColor='#fff'
+        label="Password"
+        underlineColor="#fff"
         theme={maskTheme}
         onChangeText={setPassword}
-        autoComplete='password'
+        autoComplete="password"
       />
       <Button
         style={styles.button}
-        icon='lock'
+        icon="lock"
         mode={loading ? 'text' : 'outlined'}
         onPress={() => (loading ? null : attemptSignIn())}
         theme={maskTheme}
-        loading={loading}
-      >
+        loading={loading}>
         {loading ? 'Signing In' : 'Sign In'}
       </Button>
     </View>
@@ -82,8 +81,8 @@ const maskTheme = {
     text: '#fff',
     primary: '#fff',
     background: 'transparent',
-    placeholder: '#fff'
-  }
+    placeholder: '#fff',
+  },
 };
 
 const styles = StyleSheet.create({
@@ -91,18 +90,18 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 10,
     width: 65,
-    height: 65
+    height: 65,
   },
   form: {
     flex: 1,
     padding: 20,
     textAlign: 'center',
     justifyContent: 'center',
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
   },
   button: {
-    marginVertical: 20
-  }
+    marginVertical: 20,
+  },
 });
 
 export default EmailPassword;

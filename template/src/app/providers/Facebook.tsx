@@ -12,7 +12,10 @@ function Facebook(): JSX.Element | null {
   const [loading, setLoading] = useState(false);
   const user = useContext(UserContext);
 
-  const {isOnlyProvider, title, variant} = getProviderButtonTitle(user, PROVIDER_ID);
+  const {isOnlyProvider, title, variant} = getProviderButtonTitle(
+    user,
+    PROVIDER_ID,
+  );
 
   async function handleFacebook() {
     if (!loading) {
@@ -22,19 +25,25 @@ function Facebook(): JSX.Element | null {
         if (variant === 'UNLINK' && user) {
           await user.unlink(PROVIDER_ID);
         } else {
-          const {isCancelled} = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+          const {isCancelled} = await LoginManager.logInWithPermissions([
+            'public_profile',
+            'email',
+          ]);
 
           if (isCancelled) {
             Alert.alert('Facebook Auth Canceled');
           } else {
             const result = await AccessToken.getCurrentAccessToken();
             if (!result) {
-              throw new Error('No Access Token was returned from Facebook SDK.');
+              throw new Error(
+                'No Access Token was returned from Facebook SDK.',
+              );
             }
 
             const {accessToken} = result;
 
-            const credential = auth.FacebookAuthProvider.credential(accessToken);
+            const credential =
+              auth.FacebookAuthProvider.credential(accessToken);
 
             if (variant === 'LINK' && user) {
               await user.linkWithCredential(credential);
@@ -56,7 +65,7 @@ function Facebook(): JSX.Element | null {
   }
 
   return (
-    <ProviderButton loading={loading} type='facebook' onPress={handleFacebook}>
+    <ProviderButton loading={loading} type="facebook" onPress={handleFacebook}>
       {title}
     </ProviderButton>
   );

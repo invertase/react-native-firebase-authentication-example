@@ -2,7 +2,14 @@ import auth from '@react-native-firebase/auth';
 import React, {useEffect, useState} from 'react';
 import {Alert, ScrollView, StyleSheet, View} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {Banner, Button, Divider, Paragraph, TextInput, Title} from 'react-native-paper';
+import {
+  Banner,
+  Button,
+  Divider,
+  Paragraph,
+  TextInput,
+  Title,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function EditProfile(): JSX.Element | null {
@@ -11,7 +18,9 @@ function EditProfile(): JSX.Element | null {
   const [error, setError] = useState('');
   const [signingOut, setSigningOut] = useState(false);
   const [savingName, setSavingName] = useState(false);
-  const [displayName, setDisplayName] = useState(user ? user.displayName || '' : '');
+  const [displayName, setDisplayName] = useState(
+    user ? user.displayName || '' : '',
+  );
   const [savingPassword, setSavingPassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -38,7 +47,7 @@ function EditProfile(): JSX.Element | null {
       try {
         setSavingName(true);
         await user.updateProfile({
-          displayName
+          displayName,
         });
       } catch (e) {
         setError((e as Error).message);
@@ -82,30 +91,37 @@ function EditProfile(): JSX.Element | null {
                   'Verification',
                   `A verification email has been sent to 
                     ${user.email}
-                    . Please follow the instructions to verify your email address.`
-                )
+                    . Please follow the instructions to verify your email address.`,
+                ),
               );
-            }
-          }
+            },
+          },
         ]}
-        icon={({size}) => <Icon name='alert-decagram' size={size} color='#f44336' />}
-        style={styles.banner}
-      >
-        Please verify your email address to use the full features of this app! Click the button below to
-        resend a verification email.
+        icon={({size}) => (
+          <Icon name="alert-decagram" size={size} color="#f44336" />
+        )}
+        style={styles.banner}>
+        Please verify your email address to use the full features of this app!
+        Click the button below to resend a verification email.
       </Banner>
       <View style={styles.content}>
         <Title>Display Settings:</Title>
-        <Paragraph>Set a custom display name for a personalized greeting.</Paragraph>
+        <Paragraph>
+          Set a custom display name for a personalized greeting.
+        </Paragraph>
         <TextInput
           style={styles.input}
-          mode='outlined'
-          label='Display Name'
+          mode="outlined"
+          label="Display Name"
           value={displayName}
           onChangeText={setDisplayName}
-          autoComplete='name'
+          autoComplete="name"
         />
-        <Button mode='outlined' loading={savingName} onPress={handleDisplayName} style={styles.button}>
+        <Button
+          mode="outlined"
+          loading={savingName}
+          onPress={handleDisplayName}
+          style={styles.button}>
           Save
         </Button>
       </View>
@@ -113,53 +129,52 @@ function EditProfile(): JSX.Element | null {
       <View style={styles.content}>
         <Title>Password Update:</Title>
         <Paragraph>
-          Update your account password. For security purposes, please enter your current account password.
+          Update your account password. For security purposes, please enter your
+          current account password.
         </Paragraph>
         <TextInput
           secureTextEntry
           style={styles.input}
-          mode='outlined'
-          label='Current Password'
+          mode="outlined"
+          label="Current Password"
           value={currentPassword}
           onChangeText={setCurrentPassword}
-          autoComplete='password'
+          autoComplete="password"
         />
         <TextInput
           secureTextEntry
           style={styles.input}
-          mode='outlined'
-          label='New Password'
+          mode="outlined"
+          label="New Password"
           value={newPassword}
           onChangeText={setNewPassword}
-          autoComplete='password'
+          autoComplete="password"
         />
         <TextInput
           secureTextEntry
           style={styles.input}
-          mode='outlined'
-          label='Confirm New Password'
+          mode="outlined"
+          label="Confirm New Password"
           value={confirmPassword}
           onChangeText={setConfirmPassword}
-          autoComplete='password'
+          autoComplete="password"
         />
         <Button
           disabled={!currentPassword || !newPassword || !confirmPassword}
-          mode='outlined'
+          mode="outlined"
           loading={savingPassword}
           onPress={handlePassword}
-          style={styles.button}
-        >
+          style={styles.button}>
           Update
         </Button>
       </View>
       <Divider />
       <View style={[styles.content, styles.actions]}>
         <Button
-          mode='contained'
+          mode="contained"
           loading={signingOut}
           onPress={() => (signingOut ? null : signOut())}
-          style={[styles.button, styles.maxWidth]}
-        >
+          style={[styles.button, styles.maxWidth]}>
           Sign Out
         </Button>
       </View>
@@ -170,27 +185,27 @@ function EditProfile(): JSX.Element | null {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   maxWidth: {
-    width: '100%'
+    width: '100%',
   },
   content: {
-    padding: 16
+    padding: 16,
   },
   banner: {
-    backgroundColor: '#ffebee'
+    backgroundColor: '#ffebee',
   },
   input: {
-    marginTop: 20
+    marginTop: 20,
   },
   button: {
     alignSelf: 'center',
-    marginVertical: 20
+    marginVertical: 20,
   },
   actions: {
-    backgroundColor: '#F6F7F8'
-  }
+    backgroundColor: '#F6F7F8',
+  },
 });
 
 export default EditProfile;

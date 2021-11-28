@@ -26,17 +26,22 @@ function getSocialColor(type: SocialType): string {
   }
 }
 
-function ProviderButton({style, type, onPress, loading, children}: Props): JSX.Element {
+function ProviderButton({
+  style,
+  type,
+  onPress,
+  loading,
+  children,
+}: Props): JSX.Element {
   return (
     <Button
       style={[styles.button, style]}
-      icon={() => <Icon name={type} color='#fff' size={17} />}
-      mode='contained'
+      icon={() => <Icon name={type} color="#fff" size={17} />}
+      mode="contained"
       color={getSocialColor(type)}
       dark
       loading={loading}
-      onPress={() => (loading ? null : onPress())}
-    >
+      onPress={() => (loading ? null : onPress())}>
       {children}
     </Button>
   );
@@ -47,6 +52,6 @@ export default ProviderButton;
 const styles = StyleSheet.create({
   button: {
     marginVertical: 5,
-    width: 300
-  }
+    width: 300,
+  },
 });

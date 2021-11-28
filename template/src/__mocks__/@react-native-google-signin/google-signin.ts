@@ -1,14 +1,16 @@
 import {NativeModules} from 'react-native';
 
 jest.mock('@react-native-google-signin/google-signin', () => {
-  const mockGoogleSignin = jest.requireActual('@react-native-google-signin/google-signin');
+  const mockGoogleSignin = jest.requireActual(
+    '@react-native-google-signin/google-signin',
+  );
 
   mockGoogleSignin.GoogleSignin.hasPlayServices = () => Promise.resolve(true);
   mockGoogleSignin.GoogleSignin.configure = () => Promise.resolve();
   mockGoogleSignin.GoogleSignin.currentUserAsync = () =>
     Promise.resolve({
       name: 'name',
-      email: 'test@example.com'
+      email: 'test@example.com',
       // .... other user data
     });
 
@@ -29,7 +31,7 @@ NativeModules.RNGoogleSignin = {
   PLAY_SERVICES_NOT_AVAILABLE: '2',
   SIGN_IN_REQUIRED: '3',
   configure: jest.fn(),
-  currentUserAsync: jest.fn()
+  currentUserAsync: jest.fn(),
 };
 
 export default {NativeModules};

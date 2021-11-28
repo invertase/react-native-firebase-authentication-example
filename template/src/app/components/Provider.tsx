@@ -13,7 +13,7 @@ const providerMap: {[key: string]: string} = {
   password: 'email-lock',
   facebook: 'facebook',
   google: 'google',
-  phone: 'phone'
+  phone: 'phone',
 };
 
 function Provider({type, active, style}: Props): JSX.Element | null {
@@ -26,18 +26,22 @@ function Provider({type, active, style}: Props): JSX.Element | null {
 
   return (
     <View style={[style, styles[active ? 'active' : 'inactive']]}>
-      <Icon name={icon} size={24} color={active ? theme.colors.primary : '#000'} />
+      <Icon
+        name={icon}
+        size={24}
+        color={active ? theme.colors.primary : '#000'}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   inactive: {
-    opacity: 0.3
+    opacity: 0.3,
   },
   active: {
-    opacity: 1
-  }
+    opacity: 1,
+  },
 });
 
 export default Provider;

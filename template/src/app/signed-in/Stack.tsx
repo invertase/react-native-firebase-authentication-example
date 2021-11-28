@@ -15,13 +15,16 @@ function SignedInStack() {
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: theme.colors.primary
+            backgroundColor: theme.colors.primary,
           },
-          headerTintColor: theme.colors.accent
-        }}
-      >
-        <Stack.Screen name='Profile' component={Profile} options={{header: undefined}} />
-        <Stack.Screen name='Settings' component={Settings} />
+          headerTintColor: theme.colors.accent,
+        }}>
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{header: undefined}}
+        />
+        <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
     </BaseNavigationContainer>
   );

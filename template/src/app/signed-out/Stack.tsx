@@ -17,15 +17,26 @@ function SignedOutStack() {
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: theme.colors.primary
+            backgroundColor: theme.colors.primary,
           },
-          headerTintColor: theme.colors.accent
-        }}
-      >
-        <Stack.Screen name='SignIn' component={SignIn} options={{headerShown: false}} />
-        <Stack.Screen name='CreateAccount' options={{title: 'Create Account'}} component={CreateAccount} />
-        <Stack.Screen name='ForgotPassword' component={ForgotPassword} options={{title: 'Forgot Password'}} />
-        <Stack.Screen name='PhoneSignIn' component={PhoneSignIn} />
+          headerTintColor: theme.colors.accent,
+        }}>
+        <Stack.Screen
+          name="SignIn"
+          component={SignIn}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="CreateAccount"
+          options={{title: 'Create Account'}}
+          component={CreateAccount}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
+          options={{title: 'Forgot Password'}}
+        />
+        <Stack.Screen name="PhoneSignIn" component={PhoneSignIn} />
       </Stack.Navigator>
     </BaseNavigationContainer>
   );

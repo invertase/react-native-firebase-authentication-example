@@ -1,7 +1,16 @@
 import dayjs from 'dayjs';
 import React, {useContext} from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
-import {Avatar, Caption, FAB, Headline, Subheading, useTheme, Title, withTheme} from 'react-native-paper';
+import {
+  Avatar,
+  Caption,
+  FAB,
+  Headline,
+  Subheading,
+  useTheme,
+  Title,
+  withTheme,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/core';
 import {UserContext} from '../App';
@@ -41,27 +50,30 @@ function Profile() {
       <View style={styles.content}>
         <Headline>
           {user.displayName ? user.displayName : user.email}{' '}
-          {user.emailVerified && <Icon name='check-decagram' color='#2196f3' size={26} />}
+          {user.emailVerified && (
+            <Icon name="check-decagram" color="#2196f3" size={26} />
+          )}
         </Headline>
         {!!user.displayName && <Title>{user.email}</Title>}
         {!!user.phoneNumber && <Subheading>{user.phoneNumber}</Subheading>}
         {!!user.metadata.lastSignInTime && (
           <Caption>
-            {`Last sign-in: ${dayjs(user.metadata.lastSignInTime).format('DD/MM/YYYY HH:mm')}`}
+            {`Last sign-in: ${dayjs(user.metadata.lastSignInTime).format(
+              'DD/MM/YYYY HH:mm',
+            )}`}
           </Caption>
         )}
       </View>
       <View style={styles.providers}>
-        <Provider type='password' active={providers.includes('password')} />
-        <Provider type='facebook' active={providers.includes('facebook.com')} />
-        <Provider type='google' active={providers.includes('google.com')} />
-        <Provider type='phone' active={providers.includes('phone')} />
+        <Provider type="password" active={providers.includes('password')} />
+        <Provider type="facebook" active={providers.includes('facebook.com')} />
+        <Provider type="google" active={providers.includes('google.com')} />
+        <Provider type="phone" active={providers.includes('phone')} />
       </View>
       <FAB
-        color='#fff'
+        color="#fff"
         style={[styles.fab, {backgroundColor: theme.colors.primary}]}
-        icon='account-settings'
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        icon="account-settings"
         // @ts-ignore FIXME need to type the navigator
         onPress={() => navigation.navigate('Settings')}
       />
@@ -79,19 +91,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   content: {
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   profile: {
     marginTop: -50,
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   avatar: {
     borderColor: '#fff',
     borderWidth: 5,
-    elevation: 4
+    elevation: 4,
   },
   providers: {
     backgroundColor: '#F6F7F8',
@@ -99,18 +111,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginVertical: 30,
-    padding: 20
+    padding: 20,
   },
   fab: {
     position: 'absolute',
     margin: 16,
     right: 0,
-    bottom: 0
+    bottom: 0,
   },
   center: {
     width: '100%',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 export default withTheme(Profile);

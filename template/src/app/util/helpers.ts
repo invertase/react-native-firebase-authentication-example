@@ -5,13 +5,13 @@ type ProviderID = 'google.com' | 'facebook.com' | 'apple.com';
 const providerNames = {
   'google.com': 'Google',
   'facebook.com': 'Facebook',
-  'apple.com': 'Apple'
+  'apple.com': 'Apple',
 };
 
 const providerTitles: {[key: string]: string} = {
   SIGN_IN: 'Sign in with',
   LINK: 'Link',
-  UNLINK: 'Unlink'
+  UNLINK: 'Unlink',
 };
 
 /**
@@ -19,14 +19,16 @@ const providerTitles: {[key: string]: string} = {
  */
 export function getProviders(user: FirebaseAuthTypes.User | null): string[] {
   if (user) {
-    return user.providerData.map((provider) => provider.providerId);
+    return user.providerData.map(provider => provider.providerId);
   }
 
   return [];
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function getProviderButtonTitle(user: FirebaseAuthTypes.User | null, providerID: ProviderID) {
+export function getProviderButtonTitle(
+  user: FirebaseAuthTypes.User | null,
+  providerID: ProviderID,
+) {
   const providers = getProviders(user);
   const isProvider = providers.includes(providerID);
   const isOnlyProvider = providers.length === 1 && isProvider;
@@ -39,13 +41,13 @@ export function getProviderButtonTitle(user: FirebaseAuthTypes.User | null, prov
   return {
     variant,
     title: `${providerTitles[variant]} ${providerNames[providerID]}`,
-    isOnlyProvider
+    isOnlyProvider,
   };
 }
 
 export function handleAuthError(
   error: FirebaseAuthTypes.PhoneAuthError,
-  errorHandler: CallableFunction
+  errorHandler: CallableFunction,
 ): void {
   switch (error.code) {
     case 'auth/account-exists-with-different-credential':
@@ -63,12 +65,10 @@ export function handleAuthError(
       break;
     case 'auth/operation-not-allowed':
       console.info(
-        // eslint-disable-next-line max-len
-        'The type of account corresponding to the credential is not enabled. Enable the account type in the Firebase Console, under the Auth tab.'
+        'The type of account corresponding to the credential is not enabled. Enable the account type in the Firebase Console, under the Auth tab.',
       );
       errorHandler(
-        // eslint-disable-next-line max-len
-        'These type of accounts are not enabled for this app by the developer. More info is available in the console output.'
+        'These type of accounts are not enabled for this app by the developer. More info is available in the console output.',
       );
       break;
     case 'auth/user-not-found':
@@ -76,10 +76,14 @@ export function handleAuthError(
       errorHandler('No user found or wrong password.');
       break;
     case 'auth/invalid-verification-code':
-      errorHandler('Unable to sign you in, the verification code is invalid. Please try again.');
+      errorHandler(
+        'Unable to sign you in, the verification code is invalid. Please try again.',
+      );
       break;
     case 'auth/invalid-verification-id':
-      errorHandler('Unable to sign you in, the verification ID is invalid. Please try again.');
+      errorHandler(
+        'Unable to sign you in, the verification ID is invalid. Please try again.',
+      );
       break;
     case 'auth/invalid-phone-number':
       errorHandler('Please enter a valid phone number.');

@@ -7,64 +7,64 @@ jest.doMock('react-native', () => {
         OS: 'android',
         select: () => {
           /* empty on purpose */
-        }
+        },
       },
       NativeModules: {
         ...ReactNative.NativeModules,
         RNFBAnalyticsModule: {
           logEvent: jest.fn(),
-          setAnalyticsCollectionEnabled: jest.fn()
+          setAnalyticsCollectionEnabled: jest.fn(),
         },
         RNFBAppModule: {
           NATIVE_FIREBASE_APPS: [
             {
               appConfig: {
-                name: '[DEFAULT]'
+                name: '[DEFAULT]',
               },
-              options: {}
+              options: {},
             },
 
             {
               appConfig: {
-                name: 'secondaryFromNative'
+                name: 'secondaryFromNative',
               },
-              options: {}
-            }
+              options: {},
+            },
           ],
           addListener: jest.fn(),
           eventsAddListener: jest.fn(),
           eventsNotifyReady: jest.fn(),
-          removeListeners: jest.fn()
+          removeListeners: jest.fn(),
         },
         RNFBAuthModule: {
           APP_LANGUAGE: {
-            '[DEFAULT]': 'en-US'
+            '[DEFAULT]': 'en-US',
           },
           APP_USER: {
-            '[DEFAULT]': 'jestUser'
+            '[DEFAULT]': 'jestUser',
           },
           addAuthStateListener: jest.fn(),
           addIdTokenListener: jest.fn(),
-          useEmulator: jest.fn()
+          useEmulator: jest.fn(),
         },
         RNFBCrashlyticsModule: {},
         RNFBDatabaseModule: {
           on: jest.fn(),
-          useEmulator: jest.fn()
+          useEmulator: jest.fn(),
         },
         RNFBFirestoreModule: {
           settings: jest.fn(),
-          documentSet: jest.fn()
+          documentSet: jest.fn(),
         },
         RNFBMessagingModule: {
-          onMessage: jest.fn()
+          onMessage: jest.fn(),
         },
         RNFBPerfModule: {},
         RNFBStorageModule: {
-          useEmulator: jest.fn()
-        }
-      }
+          useEmulator: jest.fn(),
+        },
+      },
     },
-    ReactNative
+    ReactNative,
   );
 });

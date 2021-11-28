@@ -8,6 +8,6 @@ export default {
     ...DefaultTheme.colors,
     primary: '#009688',
     accent: '#fff',
-    background: '#fff'
-  }
+    background: '#fff',
+  },
 };

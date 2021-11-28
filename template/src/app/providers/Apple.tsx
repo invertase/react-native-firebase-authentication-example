@@ -5,7 +5,7 @@ import {Alert, Platform, StyleSheet} from 'react-native';
 import appleAuth, {
   AppleButton,
   AppleRequestOperation,
-  AppleRequestScope
+  AppleRequestScope,
 } from '@invertase/react-native-apple-authentication';
 import {UserContext} from '../App';
 import {getProviderButtonTitle} from '../util/helpers';
@@ -32,12 +32,18 @@ function Apple(): JSX.Element | null {
         } else {
           const appleAuthRequestResponse = await appleAuth.performRequest({
             requestedOperation: AppleRequestOperation.LOGIN,
-            requestedScopes: [AppleRequestScope.EMAIL, AppleRequestScope.FULL_NAME]
+            requestedScopes: [
+              AppleRequestScope.EMAIL,
+              AppleRequestScope.FULL_NAME,
+            ],
           });
 
           const {identityToken, nonce} = appleAuthRequestResponse;
           if (identityToken) {
-            const credential = auth.AppleAuthProvider.credential(identityToken, nonce);
+            const credential = auth.AppleAuthProvider.credential(
+              identityToken,
+              nonce,
+            );
 
             if (variant === 'LINK' && user) {
               await user.linkWithCredential(credential);
@@ -45,7 +51,10 @@ function Apple(): JSX.Element | null {
               await auth().signInWithCredential(credential);
             }
           } else {
-            Alert.alert('Apple Auth Error', 'Unable to obtain an identity token from Apple.');
+            Alert.alert(
+              'Apple Auth Error',
+              'Unable to obtain an identity token from Apple.',
+            );
           }
         }
       } catch (e) {
@@ -79,8 +88,8 @@ const styles = StyleSheet.create({
   appleButton: {
     width: 300,
     height: 35,
-    margin: 6
-  }
+    margin: 6,
+  },
 });
 
 export default Apple;

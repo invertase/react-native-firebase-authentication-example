@@ -3,11 +3,16 @@ import {AsYouType, parsePhoneNumberFromString} from 'libphonenumber-js';
 import React, {Fragment, useRef, useState} from 'react';
 import {Alert, StyleSheet} from 'react-native';
 
-import CountryPicker, {CountryCode, Country} from 'react-native-country-picker-modal';
+import CountryPicker, {
+  CountryCode,
+  Country,
+} from 'react-native-country-picker-modal';
 import {Button, Paragraph, TextInput} from 'react-native-paper';
 
 type ConfirmationRef =
-  | ((verificationCode: string) => Promise<FirebaseAuthTypes.UserCredential | null>)
+  | ((
+      verificationCode: string,
+    ) => Promise<FirebaseAuthTypes.UserCredential | null>)
   | null;
 
 function Phone(): JSX.Element {
@@ -47,13 +52,10 @@ function Phone(): JSX.Element {
   }
 
   function isValid() {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore - the country code lists are out of sync
     const phoneNumber = parsePhoneNumberFromString(
       number,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore ('AQ' does not exist yet)
-      country?.cca2 ?? 'US'
+      country?.cca2 ?? 'US',
     );
     if (phoneNumber) {
       return phoneNumber.isValid();
@@ -79,27 +81,28 @@ function Phone(): JSX.Element {
   return confirmationRef.current ? (
     <Fragment>
       <TextInput
-        keyboardType='number-pad'
-        mode='outlined'
-        label='Verification Code'
+        keyboardType="number-pad"
+        mode="outlined"
+        label="Verification Code"
         value={verification}
         onChangeText={setVerification}
-        autoComplete='sms-otp'
+        autoComplete="sms-otp"
       />
 
       <Button
         style={styles.submit}
         loading={loading}
         disabled={!verification}
-        mode='contained'
-        onPress={handleVerification}
-      >
+        mode="contained"
+        onPress={handleVerification}>
         Confirm
       </Button>
     </Fragment>
   ) : (
     <Fragment>
-      <Paragraph style={styles.paragraph}>Touch to select phone number country:</Paragraph>
+      <Paragraph style={styles.paragraph}>
+        Touch to select phone number country:
+      </Paragraph>
       <CountryPicker
         containerButtonStyle={styles.phoneCountry}
         countryCode={countryCode}
@@ -110,30 +113,29 @@ function Phone(): JSX.Element {
           withCallingCode: true,
           preferredCountries: ['US', 'GB'],
           modalProps: {
-            visible
+            visible,
           },
           onClose: () => setVisible(false),
-          onOpen: () => setVisible(true)
+          onOpen: () => setVisible(true),
         }}
       />
 
       <Paragraph style={styles.paragraph}>Enter your phone number:</Paragraph>
       <TextInput
-        keyboardType='number-pad'
-        mode='outlined'
-        label='Phone Number'
+        keyboardType="number-pad"
+        mode="outlined"
+        label="Phone Number"
         value={number}
         onChangeText={handleNumber}
-        autoComplete='tel'
+        autoComplete="tel"
       />
 
       <Button
         style={styles.submit}
         loading={loading}
         disabled={!isValid()}
-        mode='contained'
-        onPress={handlePhoneAuth}
-      >
+        mode="contained"
+        onPress={handlePhoneAuth}>
         Submit
       </Button>
     </Fragment>
@@ -148,25 +150,25 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 3,
-    padding: 13
+    padding: 13,
   },
   phoneCountryCode: {
     marginTop: 5,
-    marginLeft: 5
+    marginLeft: 5,
   },
   paragraph: {
-    marginBottom: 5
+    marginBottom: 5,
   },
   button: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   picker: {
     height: 0,
-    opacity: 0
+    opacity: 0,
   },
   submit: {
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 });
 
 export default Phone;

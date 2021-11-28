@@ -33,16 +33,20 @@ function ForgotPassword(): JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Paragraph>Enter your email address below to send a password reset email:</Paragraph>
+      <Paragraph>
+        Enter your email address below to send a password reset email:
+      </Paragraph>
       <TextInput
         style={styles.input}
-        mode='outlined'
-        label='Email Address'
+        mode="outlined"
+        label="Email Address"
         onChangeText={setEmail}
         theme={inputTheme}
-        autoComplete='email'
+        autoComplete="email"
       />
-      <Button loading={loading} onPress={() => (loading ? null : attemptReset())}>
+      <Button
+        loading={loading}
+        onPress={() => (loading ? null : attemptReset())}>
         {loading ? 'Sending Password Reset' : 'Send Password Reset'}
       </Button>
     </View>
@@ -51,19 +55,19 @@ function ForgotPassword(): JSX.Element {
 
 const inputTheme = {
   colors: {
-    background: '#fff'
-  }
+    background: '#fff',
+  },
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 20
+    padding: 20,
   },
   input: {
-    marginVertical: 10
-  }
+    marginVertical: 10,
+  },
 });
 
 export default ForgotPassword;

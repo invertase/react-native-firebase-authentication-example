@@ -20,53 +20,48 @@ function SignIn() {
         height={300}
         image={
           'https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'
-        }
-      >
+        }>
         <EmailPassword />
       </Hero>
 
       <View style={[styles.fab, {backgroundColor: theme.colors.primary}]}>
-        <Icon name='arrow-down' color='#fff' size={23} />
+        <Icon name="arrow-down" color="#fff" size={23} />
       </View>
 
       <View style={styles.center}>
         <Button
-          color='#9e9e9e'
+          color="#9e9e9e"
           onPress={() => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore FIXME need to type the navigator
             return navigation.navigate('ForgotPassword');
           }}
-          style={styles.button}
-        >
+          style={styles.button}>
           Forgot Password?
         </Button>
         <Button
-          mode='contained'
-          icon='plus'
+          mode="contained"
+          icon="plus"
           onPress={() => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore FIXME need to type the navigator
             return navigation.navigate('CreateAccount');
           }}
-          style={styles.button}
-        >
+          style={styles.button}>
           Create an Account
         </Button>
 
-        <View style={[styles.divider, {backgroundColor: theme.colors.primary}]} />
+        <View
+          style={[styles.divider, {backgroundColor: theme.colors.primary}]}
+        />
 
         {Platform.OS !== 'web' && <Facebook />}
         {Platform.OS !== 'web' && <Google />}
         {Platform.OS !== 'web' && <Apple />}
         <ProviderButton
-          type='phone'
+          type="phone"
           onPress={() => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore FIXME need to type the navigator
             return navigation.navigate('PhoneSignIn');
-          }}
-        >
+          }}>
           Sign in with phone number
         </ProviderButton>
       </View>
@@ -76,7 +71,7 @@ function SignIn() {
 
 const styles = StyleSheet.create({
   center: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   fab: {
     width: 50,
@@ -86,17 +81,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     elevation: 6,
-    marginTop: -25
+    marginTop: -25,
   },
   button: {
     marginVertical: 5,
-    width: 300
+    width: 300,
   },
   divider: {
     width: 300,
     marginVertical: 20,
-    height: StyleSheet.hairlineWidth
-  }
+    height: StyleSheet.hairlineWidth,
+  },
 });
 
 export default withTheme(SignIn);
