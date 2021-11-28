@@ -1,9 +1,9 @@
 import auth from '@react-native-firebase/auth';
-import React, {useContext, useState} from 'react';
+import {useContext, useState} from 'react';
 import {Alert} from 'react-native';
 import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
 import {UserContext} from '../App';
-import ProviderButton from '../components/ProviderButton';
+import ProviderButton from '../components/AuthProviderButton';
 import {getProviderButtonTitle} from '../util/helpers';
 
 const PROVIDER_ID = 'facebook.com';

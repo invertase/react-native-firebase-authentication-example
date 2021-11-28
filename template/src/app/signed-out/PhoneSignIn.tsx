@@ -1,6 +1,5 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import Phone from '../providers/Phone';
+import Phone from '../auth-providers/Phone';
 
 function PhoneSignIn(): JSX.Element {
   return (

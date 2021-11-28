@@ -1,5 +1,5 @@
 import auth from '@react-native-firebase/auth';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Alert, ScrollView, StyleSheet, View} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {

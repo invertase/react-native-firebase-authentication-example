@@ -1,6 +1,6 @@
 import {FirebaseError} from '@firebase/util';
 import auth from '@react-native-firebase/auth';
-import React, {useContext, useState} from 'react';
+import {useContext, useState} from 'react';
 import {Alert, Platform, StyleSheet} from 'react-native';
 import appleAuth, {
   AppleButton,

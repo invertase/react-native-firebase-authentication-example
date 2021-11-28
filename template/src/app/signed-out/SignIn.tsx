@@ -1,14 +1,14 @@
-import React, {Fragment} from 'react';
+import {Fragment} from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
 import {Button, useTheme, withTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/core';
 import Hero from '../components/Hero';
-import ProviderButton from '../components/ProviderButton';
-import EmailPassword from '../providers/EmailPassword';
-import Facebook from '../providers/Facebook';
-import Google from '../providers/Google';
-import Apple from '../providers/Apple';
+import ProviderButton from '../components/AuthProviderButton';
+import EmailPassword from '../auth-providers/EmailPassword';
+import Facebook from '../auth-providers/Facebook';
+import Google from '../auth-providers/Google';
+import Apple from '../auth-providers/Apple';
 
 function SignIn() {
   const theme = useTheme();

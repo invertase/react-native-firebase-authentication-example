@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, View, ViewStyle} from 'react-native';
 import {useTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';

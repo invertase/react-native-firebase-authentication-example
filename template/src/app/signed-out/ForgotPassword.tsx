@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {Alert, StyleSheet, View} from 'react-native';
 import {Button, Paragraph, TextInput} from 'react-native-paper';

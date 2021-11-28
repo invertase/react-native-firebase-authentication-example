@@ -1,5 +1,5 @@
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Alert, Image, StyleSheet, View} from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
 import {handleAuthError} from '../util/helpers';

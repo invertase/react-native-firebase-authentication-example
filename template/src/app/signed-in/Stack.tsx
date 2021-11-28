@@ -1,6 +1,5 @@
 import {BaseNavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import React from 'react';
 import {useTheme, withTheme} from 'react-native-paper';
 import Profile from './Profile';
 import Settings from './Settings';

@@ -1,5 +1,5 @@
 import auth from '@react-native-firebase/auth';
-import React, {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 import {FirebaseError} from '@firebase/util';
 import {
@@ -7,7 +7,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {UserContext} from '../App';
-import ProviderButton from '../components/ProviderButton';
+import ProviderButton from '../components/AuthProviderButton';
 import {getProviderButtonTitle} from '../util/helpers';
 
 const PROVIDER_ID = 'google.com';

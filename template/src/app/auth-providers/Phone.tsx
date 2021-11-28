@@ -1,12 +1,13 @@
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {AsYouType, parsePhoneNumberFromString} from 'libphonenumber-js';
-import React, {Fragment, useRef, useState} from 'react';
+import {
+  AsYouType,
+  CountryCode,
+  parsePhoneNumberFromString,
+} from 'libphonenumber-js';
+import {Fragment, useRef, useState} from 'react';
 import {Alert, StyleSheet} from 'react-native';
 
-import CountryPicker, {
-  CountryCode,
-  Country,
-} from 'react-native-country-picker-modal';
+import CountryPicker, {Country} from 'react-native-country-picker-modal';
 import {Button, Paragraph, TextInput} from 'react-native-paper';
 
 type ConfirmationRef =
@@ -21,7 +22,7 @@ function Phone(): JSX.Element {
   const [number, setNumber] = useState('+1 ');
   const [verification, setVerification] = useState('');
 
-  const [countryCode, setCountryCode] = useState<CountryCode>('US');
+  const [countryCode, setCountryCode] = useState('US');
   const [country, setCountry] = useState<Country>();
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -54,8 +55,7 @@ function Phone(): JSX.Element {
   function isValid() {
     const phoneNumber = parsePhoneNumberFromString(
       number,
-      // @ts-ignore ('AQ' does not exist yet)
-      country?.cca2 ?? 'US',
+      ((country && country.cca2) || 'US') as CountryCode,
     );
     if (phoneNumber) {
       return phoneNumber.isValid();
@@ -105,8 +105,10 @@ function Phone(): JSX.Element {
       </Paragraph>
       <CountryPicker
         containerButtonStyle={styles.phoneCountry}
+        // @ts-ignore
         countryCode={countryCode}
         {...{
+          excludeCountries: ['AQ'],
           onSelect,
           withFlag: true,
           withCountryNameButton: true,

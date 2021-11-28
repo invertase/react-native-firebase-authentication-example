@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import React, {useContext} from 'react';
+import {useContext} from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
 import {
   Avatar,
@@ -15,10 +15,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/core';
 import {UserContext} from '../App';
 import Hero from '../components/Hero';
-import Provider from '../components/Provider';
-import Facebook from '../providers/Facebook';
-import Google from '../providers/Google';
-import Apple from '../providers/Apple';
+import Provider from '../components/AuthProvider';
+import Facebook from '../auth-providers/Facebook';
+import Google from '../auth-providers/Google';
+import Apple from '../auth-providers/Apple';
 import {getProviders} from '../util/helpers';
 
 function Profile() {

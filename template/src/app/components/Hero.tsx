@@ -1,4 +1,3 @@
-import React from 'react';
 import {Image, SafeAreaView, StyleSheet, View, ViewStyle} from 'react-native';
 
 interface Props {

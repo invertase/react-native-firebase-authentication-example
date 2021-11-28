@@ -1,4 +1,3 @@
-import React from 'react';
 import {Text} from 'react-native';
 import {createContext, ReactNode, useEffect, useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
