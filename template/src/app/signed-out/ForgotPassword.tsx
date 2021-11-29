@@ -1,9 +1,8 @@
 import {useEffect, useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {Alert, StyleSheet, View} from 'react-native';
-import {Button, Paragraph, TextInput} from 'react-native-paper';
+import {Button, Paragraph, TextInput, useTheme} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/core';
-import {darkTheme} from '../theme';
 import {handleAuthError} from '../util/helpers';
 
 function ForgotPassword(): JSX.Element {
@@ -12,6 +11,7 @@ function ForgotPassword(): JSX.Element {
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
   const navigation = useNavigation();
+  const theme = useTheme();
 
   useEffect(() => {
     if (error) {
@@ -43,7 +43,7 @@ function ForgotPassword(): JSX.Element {
   }
 
   return (
-    <View style={{backgroundColor: darkTheme.colors.background}}>
+    <View style={{backgroundColor: theme.colors.background}}>
       <Paragraph>
         Enter your email address below to send a password reset email:
       </Paragraph>
