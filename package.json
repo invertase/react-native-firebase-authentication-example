@@ -1,0 +1,26 @@
+{
+  "name": "react-native-firebase-authentication-example",
+  "version": "1.0.0",
+  "description": "React Native Firebase auth boilerplate that runs out of the box on Android, IOS and Web concurrently.",
+  "repository": "git@github.com:invertase/react-native-firebase-authentication-example.git",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "author": "Mike Hardy <github@mikehardy.net",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/invertase/react-native-firebase-authentication-example/issues"
+  },
+  "homepage": "https://github.com/invertase/react-native-firebase-authentication-example",
+  "keywords": [
+    "react",
+    "native",
+    "boilerplate",
+    "firebase",
+    "auth",
+    "react-native",
+    "react-native-firebase",
+    "web",
+    "react-native-web"
+  ]
+}
