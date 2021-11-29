@@ -140,7 +140,7 @@ function EditProfile(): JSX.Element | null {
       <Divider style={styles.divider} />
       <View style={styles.content}>
         <Title>{appSettings.t('userPasswordUpdateLabel')}</Title>
-        <Paragraph>{appSettings.t('userPasswordUpdateInstructions')}</Paragraph>
+        <Paragraph>{appSettings.t('userPasswordInstructions')}</Paragraph>
         <TextInput
           secureTextEntry
           style={styles.input}
