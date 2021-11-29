@@ -56,27 +56,20 @@ export const useAppSettings = () => {
   }, []);
 
   const listener = useCallback(() => {
-    console.log('AppSettings::listener');
     const bestAvailable =
       findBestAvailableLanguage(Object.keys(translations)) ??
       fallbackLanguageLocale;
-    console.log(
-      'AppSettings::listener - bestAavailble is ' +
-        JSON.stringify(bestAvailable),
-    );
     setLanguageLocale(bestAvailable);
     I18nManager.forceRTL(bestAvailable.isRTL);
     configureI18n(bestAvailable.languageTag);
   }, [configureI18n]);
 
   useEffect(() => {
-    console.log('AppSettings::useEffect');
     listener();
 
     if (!listening) {
       addEventListener('change', listener);
       setListening(true);
-      console.log('AppSettings::useEffect::added listener');
     }
 
     // return () => {
