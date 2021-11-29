@@ -2,10 +2,9 @@
 
 Thank you for trying the Firebase Authentication example 👏
 
-   ![How-its-going](/docs/assets/hero.png)
+![How-its-going](/docs/assets/hero.png)
 
-   ![See-it-in-action](/docs/assets/RNFBAuthDemo.gif)
-
+![See-it-in-action](/docs/assets/RNFBAuthDemo.gif)
 
 **Please note that limited support is offered for this example though we will happily accept PRs.**
 
@@ -21,6 +20,7 @@ The following authentication features are ready for use in this example:
 - Change Password
 - Email verification
 - Updating user profile
+- Firebase email templates configured to match device locale
 
 and the following providers:
 
@@ -31,6 +31,10 @@ and the following providers:
 - Google (Native only, PRs needed for web support)
 
 This template creates an app that comes out of the box ready with [typescript](https://www.typescriptlang.org/) and [react-native-web](https://necolas.github.io/react-native-web/) support, based on [the Luna template](https://github.com/plaut-ro/luna#readme)
+
+This template also has single-source theme configuration and light/dark switching configured to follow system preference, as well as dynamic detection of user locale and an included translation system (English and Spanish translations to demonstrate how it works)
+
+It's ready to go for a modern-looking international app.
 
 ## Getting started
 
