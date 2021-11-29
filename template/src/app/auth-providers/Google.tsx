@@ -29,6 +29,7 @@ function Google(): JSX.Element | null {
 
         if (variant === 'UNLINK' && user) {
           await user.unlink(PROVIDER_ID);
+          await user.reload();
         } else {
           await GoogleSignin.signIn();
           const {accessToken, idToken} = await GoogleSignin.getTokens();
@@ -39,6 +40,7 @@ function Google(): JSX.Element | null {
 
           if (variant === 'LINK' && user) {
             await user.linkWithCredential(credential);
+            await user.reload();
           } else if (variant === 'SIGN_IN') {
             await auth().signInWithCredential(credential);
           }

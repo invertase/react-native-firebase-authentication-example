@@ -24,6 +24,7 @@ function Facebook(): JSX.Element | null {
       try {
         if (variant === 'UNLINK' && user) {
           await user.unlink(PROVIDER_ID);
+          await user.reload();
         } else {
           const {isCancelled} = await LoginManager.logInWithPermissions([
             'public_profile',
@@ -47,6 +48,7 @@ function Facebook(): JSX.Element | null {
 
             if (variant === 'LINK' && user) {
               await user.linkWithCredential(credential);
+              await user.reload();
             } else if (variant === 'SIGN_IN') {
               await auth().signInWithCredential(credential);
             }

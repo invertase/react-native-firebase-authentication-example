@@ -49,6 +49,7 @@ function EditProfile(): JSX.Element | null {
         await user.updateProfile({
           displayName,
         });
+        await user.reload();
       } catch (e) {
         setError((e as Error).message);
       } finally {

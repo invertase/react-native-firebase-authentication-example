@@ -29,6 +29,7 @@ function Apple(): JSX.Element | null {
       try {
         if (variant === 'UNLINK' && user) {
           await user.unlink(PROVIDER_ID);
+          await user.reload();
         } else {
           const appleAuthRequestResponse = await appleAuth.performRequest({
             requestedOperation: AppleRequestOperation.LOGIN,
@@ -47,6 +48,7 @@ function Apple(): JSX.Element | null {
 
             if (variant === 'LINK' && user) {
               await user.linkWithCredential(credential);
+              await user.reload();
             } else if (variant === 'SIGN_IN') {
               await auth().signInWithCredential(credential);
             }
