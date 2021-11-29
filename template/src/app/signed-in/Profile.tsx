@@ -19,11 +19,15 @@ import Facebook from '../auth-providers/Facebook';
 import Google from '../auth-providers/Google';
 import Apple from '../auth-providers/Apple';
 import {getProviders} from '../util/helpers';
+import {fallbackLanguageLocale, useAppSettings} from '../AppSettings';
+require('dayjs/locale/en');
+require('dayjs/locale/es');
 
 function Profile() {
   const theme = useTheme();
   const user = useContext(UserContext);
   const navigation = useNavigation();
+  const appSettings = useAppSettings();
 
   if (!user) {
     return null;
@@ -63,9 +67,14 @@ function Profile() {
         {!!user.phoneNumber && <Subheading>{user.phoneNumber}</Subheading>}
         {!!user.metadata.lastSignInTime && (
           <Caption>
-            {`Last sign-in: ${dayjs(user.metadata.lastSignInTime).format(
-              'DD/MM/YYYY HH:mm',
-            )}`}
+            {`${appSettings.t('profileLastSignIn')}: ${dayjs(
+              user.metadata.lastSignInTime,
+            )
+              .locale(
+                appSettings.languageLocale?.languageTag ??
+                  fallbackLanguageLocale.languageTag,
+              )
+              .format()}`}
           </Caption>
         )}
       </View>

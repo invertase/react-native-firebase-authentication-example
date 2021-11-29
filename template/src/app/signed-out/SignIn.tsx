@@ -8,10 +8,12 @@ import EmailPassword from '../auth-providers/EmailPassword';
 import Facebook from '../auth-providers/Facebook';
 import Google from '../auth-providers/Google';
 import Apple from '../auth-providers/Apple';
+import {useAppSettings} from '../AppSettings';
 
 function SignIn() {
   const theme = useTheme();
   const navigation = useNavigation();
+  const appSettings = useAppSettings();
 
   return (
     <Fragment>
@@ -31,7 +33,7 @@ function SignIn() {
             return navigation.navigate('ForgotPassword');
           }}
           style={styles.button}>
-          Forgot Password?
+          {appSettings.t('forgotPassword')}
         </Button>
         <Button
           mode="contained"
@@ -41,7 +43,7 @@ function SignIn() {
             return navigation.navigate('CreateAccount');
           }}
           style={styles.button}>
-          Create an Account
+          {appSettings.t('createAnAccount')}
         </Button>
 
         <View
@@ -57,7 +59,7 @@ function SignIn() {
             // @ts-ignore FIXME need to type the navigator
             return navigation.navigate('PhoneSignIn');
           }}>
-          Sign in with phone number
+          {appSettings.t('phoneSignIn')}
         </ProviderButton>
       </View>
     </Fragment>

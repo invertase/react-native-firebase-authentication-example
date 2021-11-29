@@ -12,10 +12,12 @@ import {
   useTheme,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useAppSettings} from '../AppSettings';
 
 function EditProfile(): JSX.Element | null {
   const user = auth().currentUser;
   const theme = useTheme();
+  const appSettings = useAppSettings();
 
   const [error, setError] = useState('');
   const [signingOut, setSigningOut] = useState(false);
@@ -31,15 +33,15 @@ function EditProfile(): JSX.Element | null {
 
   useEffect(() => {
     if (error) {
-      Alert.alert('Create Account - Error', error);
+      Alert.alert(appSettings.t('userUpdateError'), error);
     }
     if (passwordSuccess) {
-      Alert.alert('Password successfully changed');
+      Alert.alert(appSettings.t('userPasswordChanged'));
       setPasswordSuccess(false);
       // @ts-ignore
       navigation.navigate('SignIn');
     }
-  }, [error, passwordSuccess]);
+  }, [error, passwordSuccess, appSettings]);
 
   async function signOut() {
     setSigningOut(true);
@@ -96,14 +98,14 @@ function EditProfile(): JSX.Element | null {
         visible={!user.emailVerified}
         actions={[
           {
-            label: 'Re-send',
+            label: appSettings.t('userEmailVerify'),
             onPress: () => {
               user.sendEmailVerification().then(() =>
                 Alert.alert(
-                  'Verification',
-                  `A verification email has been sent to 
+                  appSettings.t('userEmailVerification'),
+                  `${appSettings.t('userEmailVerificationInstructions1')} 
                     ${user.email}
-                    . Please follow the instructions to verify your email address.`,
+                    . ${appSettings.t('userEmailVerificationInstructions2')}.`,
                 ),
               );
             },
@@ -112,18 +114,15 @@ function EditProfile(): JSX.Element | null {
         icon={({size}) => (
           <Icon name="alert-decagram" size={size} color="#f44336" />
         )}>
-        Please verify your email address to use the full features of this app!
-        Click the button below to resend a verification email.
+        {appSettings.t('userEmailVerificationBanner')}
       </Banner>
       <View style={styles.content}>
-        <Title>Display Settings:</Title>
-        <Paragraph>
-          Set a custom display name for a personalized greeting.
-        </Paragraph>
+        <Title>{appSettings.t('userNameDisplayLabel')}</Title>
+        <Paragraph>{appSettings.t('userNameDisplayInstructions')}</Paragraph>
         <TextInput
           style={styles.input}
           mode="outlined"
-          label="Display Name"
+          label={appSettings.t('userNameDisplayLabel')}
           value={displayName}
           onChangeText={setDisplayName}
           autoComplete="name"
@@ -134,21 +133,18 @@ function EditProfile(): JSX.Element | null {
           loading={savingName}
           onPress={handleDisplayName}
           style={styles.button}>
-          Save
+          {appSettings.t('userNameDisplaySave')}
         </Button>
       </View>
       <Divider style={styles.divider} />
       <View style={styles.content}>
-        <Title>Password Update:</Title>
-        <Paragraph>
-          Update your account password. For security purposes, please enter your
-          current account password.
-        </Paragraph>
+        <Title>{appSettings.t('userPasswordUpdateLabel')}</Title>
+        <Paragraph>{appSettings.t('userPasswordUpdateInstructions')}</Paragraph>
         <TextInput
           secureTextEntry
           style={styles.input}
           mode="outlined"
-          label="Current Password"
+          label={appSettings.t('userPasswordCurrent')}
           value={currentPassword}
           onChangeText={setCurrentPassword}
           autoComplete="password"
@@ -157,7 +153,7 @@ function EditProfile(): JSX.Element | null {
           secureTextEntry
           style={styles.input}
           mode="outlined"
-          label="New Password"
+          label={appSettings.t('userPasswordNew')}
           value={newPassword}
           onChangeText={setNewPassword}
           autoComplete="password"
@@ -166,7 +162,7 @@ function EditProfile(): JSX.Element | null {
           secureTextEntry
           style={styles.input}
           mode="outlined"
-          label="Confirm New Password"
+          label={appSettings.t('userPasswordConfirm')}
           value={confirmPassword}
           onChangeText={setConfirmPassword}
           autoComplete="password"
@@ -177,7 +173,7 @@ function EditProfile(): JSX.Element | null {
           style={styles.button}
           loading={savingPassword}
           onPress={handlePassword}>
-          Update
+          {appSettings.t('userPasswordUpdate')}
         </Button>
       </View>
       <Divider style={styles.divider} />
@@ -187,7 +183,7 @@ function EditProfile(): JSX.Element | null {
           loading={signingOut}
           onPress={() => (signingOut ? null : signOut())}
           style={[styles.button, styles.maxWidth]}>
-          Sign Out
+          {appSettings.t('userSignOut')}
         </Button>
       </View>
     </ScrollView>

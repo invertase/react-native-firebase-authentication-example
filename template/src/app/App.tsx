@@ -1,12 +1,17 @@
-import {Text} from 'react-native';
-import {createContext, ReactNode, useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {createContext, Fragment, ReactNode, useEffect, useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {Provider as PaperProvider} from 'react-native-paper';
+import {
+  Headline,
+  ActivityIndicator,
+  Provider as PaperProvider,
+} from 'react-native-paper';
 import {darkTheme} from './theme';
 import SignedInStack from './signed-in/Stack';
 import SignedOutStack from './signed-out/Stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
+import {useAppSettings} from './AppSettings';
 
 /**
  * Types
@@ -22,6 +27,8 @@ function App(): JSX.Element {
   const [initializing, setInitializing] = useState(true);
   const [listenUser, setListenUser] = useState(false);
   const [user, setUser] = useState<User>(null);
+
+  const appSettings = useAppSettings();
 
   /** Listen for auth state changes */
   useEffect(() => {
@@ -60,7 +67,30 @@ function App(): JSX.Element {
   }, [listenUser]);
 
   if (initializing) {
-    return <Text>Loading...</Text>;
+    let waiting = true;
+    setTimeout(() => {
+      waiting = false;
+    }, 1000);
+
+    return (
+      <View
+        style={[
+          styles.loadingContainer,
+          {backgroundColor: darkTheme.colors.background},
+        ]}>
+        {!waiting && (
+          <Fragment>
+            <Headline style={[styles.padded, {color: darkTheme.colors.text}]}>
+              {appSettings.t('loading')}...
+            </Headline>
+            <ActivityIndicator
+              size={'large'}
+              theme={{...darkTheme, colors: {primary: darkTheme.colors.accent}}}
+            />
+          </Fragment>
+        )}
+      </View>
+    );
   }
 
   function container(children: ReactNode | ReactNode[]) {
@@ -85,5 +115,19 @@ function App(): JSX.Element {
     ),
   );
 }
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+    // alignSelf: 'center',
+    alignItems: 'center',
+    // textAlignVertical: true,
+  },
+  padded: {
+    padding: 40,
+  },
+});
 
 export default App;

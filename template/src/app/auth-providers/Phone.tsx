@@ -9,6 +9,7 @@ import {Alert, StyleSheet} from 'react-native';
 
 import CountryPicker, {Country} from 'react-native-country-picker-modal';
 import {Button, Paragraph, TextInput, useTheme} from 'react-native-paper';
+import {useAppSettings} from '../AppSettings';
 
 type ConfirmationRef =
   | ((
@@ -27,6 +28,7 @@ function Phone(): JSX.Element {
   const [visible, setVisible] = useState<boolean>(false);
 
   const theme = useTheme();
+  const appSettings = useAppSettings();
 
   const onSelect = (newCountry: Country) => {
     setCountryCode(newCountry.cca2);
@@ -43,7 +45,7 @@ function Phone(): JSX.Element {
       } catch (error) {
         setLoading(false);
         confirmationRef.current = null;
-        Alert.alert('Phone Auth Error', (error as Error).message);
+        Alert.alert(appSettings.t('phoneAuthError'), (error as Error).message);
       }
     }
   }
@@ -72,7 +74,10 @@ function Phone(): JSX.Element {
         await confirmationRef.current(verification);
         confirmationRef.current = null;
       } catch (error) {
-        Alert.alert('Phone Verification Error', (error as Error).message);
+        Alert.alert(
+          appSettings.t('phoneVerificationError'),
+          (error as Error).message,
+        );
       } finally {
         setLoading(false);
       }
@@ -84,7 +89,7 @@ function Phone(): JSX.Element {
       <TextInput
         keyboardType="number-pad"
         mode="outlined"
-        label="Verification Code"
+        label={appSettings.t('phoneVerificationCode')}
         value={verification}
         onChangeText={setVerification}
         autoComplete="sms-otp"
@@ -96,13 +101,13 @@ function Phone(): JSX.Element {
         disabled={!verification}
         mode="contained"
         onPress={handleVerification}>
-        Confirm
+        {appSettings.t('phoneVerificationConfirm')}
       </Button>
     </Fragment>
   ) : (
     <Fragment>
       <Paragraph style={styles.paragraph}>
-        Touch to select phone number country:
+        {appSettings.t('phoneVerificationCountryInstructions')}
       </Paragraph>
       <CountryPicker
         containerButtonStyle={styles.phoneCountry}
@@ -129,11 +134,13 @@ function Phone(): JSX.Element {
         }}
       />
 
-      <Paragraph style={styles.paragraph}>Enter your phone number:</Paragraph>
+      <Paragraph style={styles.paragraph}>
+        {appSettings.t('phoneVerificationNumberInstructions')}
+      </Paragraph>
       <TextInput
         keyboardType="number-pad"
         mode="outlined"
-        label="Phone Number"
+        label={appSettings.t('phoneVerificationNumberLabel')}
         value={number}
         onChangeText={handleNumber}
         autoComplete="tel"
@@ -145,7 +152,7 @@ function Phone(): JSX.Element {
         disabled={!isValid()}
         mode="contained"
         onPress={handlePhoneAuth}>
-        Submit
+        {appSettings.t('phoneVerificationNumberSubmit')}
       </Button>
     </Fragment>
   );

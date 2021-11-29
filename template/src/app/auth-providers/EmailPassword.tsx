@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import {Alert, Image, StyleSheet, View} from 'react-native';
 import {Button, TextInput, useTheme} from 'react-native-paper';
 import {handleAuthError} from '../util/helpers';
+import {useAppSettings} from '../AppSettings';
 
 function EmailPassword(): JSX.Element {
   const [loading, setLoading] = useState(false);
@@ -12,12 +13,13 @@ function EmailPassword(): JSX.Element {
   const [password, setPassword] = useState('');
 
   const theme = useTheme();
+  const appSettings = useAppSettings();
 
   useEffect(() => {
     if (error) {
-      Alert.alert('Sign In - Error', error);
+      Alert.alert(appSettings.t('signInError'), error);
     }
-  }, [error]);
+  }, [error, appSettings]);
 
   async function attemptSignIn() {
     if (!email || !password) {
@@ -76,7 +78,7 @@ function EmailPassword(): JSX.Element {
       />
       <TextInput
         value={email}
-        label="Email Address"
+        label={appSettings.t('emailLabel')}
         theme={maskTheme}
         onChangeText={setEmail}
         autoCapitalize="none"
@@ -88,19 +90,22 @@ function EmailPassword(): JSX.Element {
         autoCapitalize="none"
         secureTextEntry
         value={password}
-        label="Password"
+        label={appSettings.t('passwordLabel')}
         theme={maskTheme}
         onChangeText={setPassword}
         autoComplete="password"
       />
       <Button
+        disabled={loading || !email || !password}
         style={[styles.button, styles.signinButton]}
         icon="lock"
-        mode={loading ? 'text' : 'outlined'}
+        mode={loading ? 'text' : 'contained'}
         onPress={() => (loading ? null : attemptSignIn())}
-        theme={maskTheme}
+        // theme={maskTheme}
         loading={loading}>
-        {loading ? 'Signing In' : 'Sign In'}
+        {loading
+          ? appSettings.t('signInSigningIn')
+          : appSettings.t('signInSignIn')}
       </Button>
     </View>
   );

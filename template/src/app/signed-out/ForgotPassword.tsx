@@ -4,6 +4,7 @@ import {Alert, StyleSheet, View} from 'react-native';
 import {Button, Paragraph, TextInput, useTheme} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/core';
 import {handleAuthError} from '../util/helpers';
+import {useAppSettings} from '../AppSettings';
 
 function ForgotPassword(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
@@ -12,18 +13,19 @@ function ForgotPassword(): JSX.Element {
   const [success, setSuccess] = useState<boolean>(false);
   const navigation = useNavigation();
   const theme = useTheme();
+  const appSettings = useAppSettings();
 
   useEffect(() => {
     if (error) {
-      Alert.alert('Forgot Password - Error', error);
+      Alert.alert(appSettings.t('forgotPasswordError'), error);
     }
     if (success) {
-      Alert.alert('Check your email for password reset instructions');
+      Alert.alert(appSettings.t('forgotPasswordSuccess'));
       setSuccess(false);
       // @ts-ignore
       navigation.navigate('SignIn');
     }
-  }, [error, success, navigation]);
+  }, [error, success, navigation, appSettings]);
 
   async function attemptReset() {
     if (!email) {
@@ -43,30 +45,37 @@ function ForgotPassword(): JSX.Element {
   }
 
   return (
-    <View style={{backgroundColor: theme.colors.background}}>
-      <Paragraph>
-        Enter your email address below to send a password reset email:
-      </Paragraph>
+    <View
+      style={[styles.container, {backgroundColor: theme.colors.background}]}>
+      <Paragraph>{appSettings.t('forgotPasswordInstructions')}</Paragraph>
       <TextInput
         autoFocus={true}
         value={email}
         autoCapitalize={'none'}
         style={styles.input}
         mode="outlined"
-        label="Email Address"
+        label={appSettings.t('forgotPasswordLabel')}
         onChangeText={setEmail}
         autoComplete="email"
       />
       <Button
+        disabled={!email}
         loading={loading}
+        mode="contained"
         onPress={() => (loading ? null : attemptReset())}>
-        {loading ? 'Sending Password Reset' : 'Send Password Reset'}
+        {loading
+          ? appSettings.t('forgotPasswordSending')
+          : appSettings.t('forgotPasswordSend')}
       </Button>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
   input: {
     marginVertical: 10,
   },

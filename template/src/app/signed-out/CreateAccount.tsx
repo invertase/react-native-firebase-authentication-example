@@ -9,6 +9,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 import {handleAuthError} from '../util/helpers';
+import {useAppSettings} from '../AppSettings';
 
 function CreateAccount(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
@@ -19,20 +20,21 @@ function CreateAccount(): JSX.Element {
   const [help, setHelp] = useState<string>('');
   const [error, setError] = useState<string>('');
   const theme = useTheme();
+  const appSettings = useAppSettings();
 
   useEffect(() => {
     if (error) {
-      Alert.alert('Create Account - Error', error);
+      Alert.alert(appSettings.t('createAccountError'), error);
     }
-  }, [error]);
+  }, [error, appSettings]);
 
   useEffect(() => {
     if (password === confirm) {
       setHelp('');
     } else if (password && confirm && password !== confirm) {
-      setHelp('Passwords do not match.');
+      setHelp(appSettings.t('Passwords do not match.'));
     }
-  }, [password, confirm]);
+  }, [password, confirm, appSettings]);
 
   async function handleCreate() {
     try {
@@ -49,14 +51,11 @@ function CreateAccount(): JSX.Element {
   return (
     <ScrollView
       style={[styles.container, {backgroundColor: theme.colors.background}]}>
-      <Paragraph>
-        Create an account with your email and password. Once created you will be
-        automatically logged in to your profile:
-      </Paragraph>
+      <Paragraph>{appSettings.t('createAccountInstructions')}</Paragraph>
       <TextInput
         style={styles.input}
         mode="outlined"
-        label="Email Address"
+        label={appSettings.t('emailLabel')}
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -69,7 +68,7 @@ function CreateAccount(): JSX.Element {
         secureTextEntry
         style={styles.input}
         mode="outlined"
-        label="Password"
+        label={appSettings.t('passwordLabel')}
         value={password}
         onChangeText={setPassword}
         autoComplete="password"
@@ -78,7 +77,7 @@ function CreateAccount(): JSX.Element {
         secureTextEntry
         style={styles.input}
         mode="outlined"
-        label="Confirm Password"
+        label={appSettings.t('createAccountPasswordConfirmLabel')}
         value={confirm}
         onChangeText={setConfirm}
         autoComplete="password"
@@ -91,7 +90,9 @@ function CreateAccount(): JSX.Element {
         mode="contained"
         disabled={!email || !password || !confirm || !!help}
         onPress={() => (loading ? null : handleCreate())}>
-        {loading ? 'Creating Account' : 'Create Account'}
+        {loading
+          ? appSettings.t('createAccountCreationg')
+          : appSettings.t('createAccountCreate')}
       </Button>
     </ScrollView>
   );
