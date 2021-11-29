@@ -1,2 +1,4 @@
 template/yarn.lock
 template/ios/Podfile.lock
+node_modules/
+yarn.lock
