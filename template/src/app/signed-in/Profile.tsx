@@ -35,14 +35,20 @@ function Profile() {
 
   return (
     <View style={styles.container}>
-      <Hero height={120} />
+      <Hero height={60} />
       <View style={[styles.content, styles.profile]}>
         {user.photoURL ? (
           <Avatar.Image size={80} source={{uri: user.photoURL}} />
         ) : (
           <Avatar.Text
             size={80}
-            label={user.email ? user.email.substring(0, 2).toUpperCase() : 'A'}
+            label={
+              user.displayName
+                ? user.displayName.substring(0, 2).toUpperCase()
+                : user.email
+                ? user.email.substring(0, 2).toUpperCase()
+                : 'A'
+            }
             style={styles.avatar}
           />
         )}
@@ -64,7 +70,7 @@ function Profile() {
           </Caption>
         )}
       </View>
-      <View style={styles.providers}>
+      <View style={[styles.providers, {backgroundColor: theme.colors.surface}]}>
         <Provider type="password" active={providers.includes('password')} />
         <Provider type="facebook" active={providers.includes('facebook.com')} />
         <Provider type="google" active={providers.includes('google.com')} />
@@ -91,7 +97,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-    backgroundColor: '#fff',
   },
   content: {
     paddingHorizontal: 20,
@@ -101,12 +106,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   avatar: {
-    borderColor: '#fff',
     borderWidth: 5,
     elevation: 4,
   },
   providers: {
-    backgroundColor: '#F6F7F8',
     elevation: 4,
     flexDirection: 'row',
     justifyContent: 'space-evenly',

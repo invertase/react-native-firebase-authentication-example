@@ -9,11 +9,13 @@ import {
   Paragraph,
   TextInput,
   Title,
+  useTheme,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function EditProfile(): JSX.Element | null {
   const user = auth().currentUser;
+  const theme = useTheme();
 
   const [error, setError] = useState('');
   const [signingOut, setSigningOut] = useState(false);
@@ -88,7 +90,8 @@ function EditProfile(): JSX.Element | null {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={[styles.container, {backgroundColor: theme.colors.background}]}>
       <Banner
         visible={!user.emailVerified}
         actions={[
@@ -108,8 +111,7 @@ function EditProfile(): JSX.Element | null {
         ]}
         icon={({size}) => (
           <Icon name="alert-decagram" size={size} color="#f44336" />
-        )}
-        style={styles.banner}>
+        )}>
         Please verify your email address to use the full features of this app!
         Click the button below to resend a verification email.
       </Banner>
@@ -127,14 +129,15 @@ function EditProfile(): JSX.Element | null {
           autoComplete="name"
         />
         <Button
-          mode="outlined"
+          mode="contained"
+          disabled={!displayName}
           loading={savingName}
           onPress={handleDisplayName}
           style={styles.button}>
           Save
         </Button>
       </View>
-      <Divider />
+      <Divider style={styles.divider} />
       <View style={styles.content}>
         <Title>Password Update:</Title>
         <Paragraph>
@@ -170,15 +173,15 @@ function EditProfile(): JSX.Element | null {
         />
         <Button
           disabled={!currentPassword || !newPassword || !confirmPassword}
-          mode="outlined"
+          mode="contained"
+          style={styles.button}
           loading={savingPassword}
-          onPress={handlePassword}
-          style={styles.button}>
+          onPress={handlePassword}>
           Update
         </Button>
       </View>
-      <Divider />
-      <View style={[styles.content, styles.actions]}>
+      <Divider style={styles.divider} />
+      <View style={[styles.content]}>
         <Button
           mode="contained"
           loading={signingOut}
@@ -194,16 +197,12 @@ function EditProfile(): JSX.Element | null {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   maxWidth: {
     width: '100%',
   },
   content: {
     padding: 16,
-  },
-  banner: {
-    backgroundColor: '#ffebee',
   },
   input: {
     marginTop: 20,
@@ -212,8 +211,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 20,
   },
-  actions: {
-    backgroundColor: '#F6F7F8',
+  divider: {
+    height: 4,
   },
 });
 

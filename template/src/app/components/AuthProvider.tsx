@@ -28,7 +28,7 @@ function Provider({type, active, style}: Props): JSX.Element | null {
       <Icon
         name={icon}
         size={24}
-        color={active ? theme.colors.primary : '#000'}
+        color={active ? theme.colors.primary : theme.colors.onSurface}
       />
     </View>
   );

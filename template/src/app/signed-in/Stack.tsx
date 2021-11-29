@@ -23,7 +23,7 @@ const ProfileStack = () => {
       <Stack.Screen
         name="Profile"
         component={Profile}
-        options={{header: undefined}}
+        options={{headerShown: false}}
       />
       <Stack.Screen name="Settings" component={Settings} />
     </Stack.Navigator>
@@ -51,7 +51,7 @@ const SignedIn = () => {
   return (
     <TopTabs.Navigator screenOptions={screenOptions}>
       <TopTabs.Screen name="Getting Started" component={GettingStarted} />
-      <TopTabs.Screen name="Profile" component={ProfileStack} />
+      <TopTabs.Screen name="User Info" component={ProfileStack} />
     </TopTabs.Navigator>
   );
 };
