@@ -20,6 +20,7 @@ export const english: translation = {
   emailLabel: 'Email Address',
   passwordLabel: 'Password',
   createAccountPasswordConfirmLabel: 'Confirm Password',
+  passwordsDoNotMatch: 'Passwords do not match',
   createAccountCreating: 'Creating Account',
   createAccountCreate: 'Create Account',
 

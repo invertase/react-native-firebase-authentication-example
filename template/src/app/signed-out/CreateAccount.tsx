@@ -33,7 +33,7 @@ function CreateAccount(): JSX.Element {
     if (password === confirm) {
       setHelp('');
     } else if (password && confirm && password !== confirm) {
-      setHelp(appSettings.t('Passwords do not match.'));
+      setHelp(appSettings.t('passwordsDoNotMatch'));
     }
   }, [password, confirm, appSettings]);
 

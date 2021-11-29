@@ -6,6 +6,7 @@ import {
   Banner,
   Button,
   Divider,
+  HelperText,
   Paragraph,
   TextInput,
   Title,
@@ -25,6 +26,7 @@ function EditProfile(): JSX.Element | null {
   const [displayName, setDisplayName] = useState(
     user ? user.displayName || '' : '',
   );
+  const [help, setHelp] = useState<string>('');
   const [savingPassword, setSavingPassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -43,6 +45,18 @@ function EditProfile(): JSX.Element | null {
       navigation.navigate('SignIn');
     }
   }, [error, passwordSuccess, appSettings]);
+
+  useEffect(() => {
+    if (newPassword === confirmPassword) {
+      setHelp('');
+    } else if (
+      newPassword &&
+      confirmPassword &&
+      newPassword !== confirmPassword
+    ) {
+      setHelp(appSettings.t('passwordsDoNotMatch'));
+    }
+  }, [newPassword, confirmPassword, appSettings]);
 
   async function signOut() {
     setSigningOut(true);
@@ -168,8 +182,16 @@ function EditProfile(): JSX.Element | null {
           onChangeText={setConfirmPassword}
           autoComplete="password"
         />
+        <HelperText type="error" visible={!!help}>
+          {help}
+        </HelperText>
         <Button
-          disabled={!currentPassword || !newPassword || !confirmPassword}
+          disabled={
+            !currentPassword ||
+            !newPassword ||
+            !confirmPassword ||
+            newPassword !== confirmPassword
+          }
           mode="contained"
           style={styles.button}
           loading={savingPassword}

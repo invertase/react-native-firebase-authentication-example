@@ -20,6 +20,7 @@ export const spanish: translation = {
   emailLabel: 'Correo Electrónico',
   passwordLabel: 'Contraseña',
   createAccountPasswordConfirmLabel: 'Confirma Contraseña',
+  passwordsDoNotMatch: 'Contraseñas no estan de acuerdo',
   createAccountCreating: 'Creando Cuenta',
   createAccountCreate: 'Crea Cuenta',
 
