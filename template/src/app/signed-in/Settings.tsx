@@ -25,12 +25,19 @@ function EditProfile(): JSX.Element | null {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordSuccess, setPasswordSuccess] = useState<boolean>(false);
 
   useEffect(() => {
     if (error) {
       Alert.alert('Create Account - Error', error);
     }
-  }, [error]);
+    if (passwordSuccess) {
+      Alert.alert('Password successfully changed');
+      setPasswordSuccess(false);
+      // @ts-ignore
+      navigation.navigate('SignIn');
+    }
+  }, [error, passwordSuccess]);
 
   async function signOut() {
     setSigningOut(true);
@@ -67,6 +74,7 @@ function EditProfile(): JSX.Element | null {
         setSavingPassword(true);
         await auth().signInWithEmailAndPassword(user.email, currentPassword);
         await user.updatePassword(newPassword);
+        setPasswordSuccess(true);
       } catch (e) {
         setError((e as Error).message);
       } finally {

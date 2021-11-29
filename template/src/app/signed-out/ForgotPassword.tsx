@@ -19,6 +19,7 @@ function ForgotPassword(): JSX.Element {
     }
     if (success) {
       Alert.alert('Check your email for password reset instructions');
+      setSuccess(false);
       // @ts-ignore
       navigation.navigate('SignIn');
     }
