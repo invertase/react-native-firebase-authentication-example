@@ -1,6 +1,6 @@
 import i18n from 'i18n-js';
 import {useCallback, useEffect, useState} from 'react';
-import {I18nManager, Platform} from 'react-native';
+import {I18nManager, Platform, useColorScheme} from 'react-native';
 import {
   findBestAvailableLanguage,
   addEventListener,
@@ -25,6 +25,7 @@ export const useAppSettings = () => {
     null,
   );
   const [listening, setListening] = useState(false);
+  const colorScheme = useColorScheme();
 
   const configureI18n = useCallback(languageTag => {
     i18n.translations = translations;
@@ -81,5 +82,6 @@ export const useAppSettings = () => {
   return {
     languageLocale,
     t: (key: string, config?: any) => i18n.t(key, config),
+    colorScheme: colorScheme ?? 'light',
   };
 };

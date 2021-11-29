@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   Provider as PaperProvider,
 } from 'react-native-paper';
-import {darkTheme} from './theme';
+import {darkTheme, defaultTheme} from './theme';
 import SignedInStack from './signed-in/Stack';
 import SignedOutStack from './signed-out/Stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -27,7 +27,6 @@ function App(): JSX.Element {
   const [initializing, setInitializing] = useState(true);
   const [listenUser, setListenUser] = useState(false);
   const [user, setUser] = useState<User>(null);
-
   const appSettings = useAppSettings();
 
   /** Listen for auth state changes */
@@ -96,8 +95,14 @@ function App(): JSX.Element {
   function container(children: ReactNode | ReactNode[]) {
     return (
       <SafeAreaProvider>
-        <PaperProvider theme={darkTheme}>
-          <NavigationContainer theme={darkTheme}>
+        <PaperProvider
+          theme={
+            appSettings.colorScheme === 'light' ? defaultTheme : darkTheme
+          }>
+          <NavigationContainer
+            theme={
+              appSettings.colorScheme === 'light' ? defaultTheme : darkTheme
+            }>
             {children}
           </NavigationContainer>
         </PaperProvider>

@@ -38,7 +38,7 @@ function Profile() {
 
   return (
     <View style={styles.container}>
-      <Hero height={60} />
+      <Hero height={60} style={{backgroundColor: theme.colors.primary}} />
       <View style={[styles.content, styles.profile]}>
         {user.photoURL ? (
           <Avatar.Image size={80} source={{uri: user.photoURL}} />
@@ -52,7 +52,7 @@ function Profile() {
                 ? user.email.substring(0, 2).toUpperCase()
                 : 'A'
             }
-            style={styles.avatar}
+            style={[styles.avatar, {borderColor: theme.colors.background}]}
           />
         )}
       </View>
