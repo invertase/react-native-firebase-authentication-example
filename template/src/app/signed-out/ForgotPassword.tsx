@@ -2,18 +2,27 @@ import {useEffect, useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {Alert, StyleSheet, View} from 'react-native';
 import {Button, Paragraph, TextInput} from 'react-native-paper';
+import {useNavigation} from '@react-navigation/core';
+import {darkTheme} from '../theme';
 import {handleAuthError} from '../util/helpers';
 
 function ForgotPassword(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<boolean>(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (error) {
       Alert.alert('Forgot Password - Error', error);
     }
-  }, [error]);
+    if (success) {
+      Alert.alert('Check your email for password reset instructions');
+      // @ts-ignore
+      navigation.navigate('SignIn');
+    }
+  }, [error, success, navigation]);
 
   async function attemptReset() {
     if (!email) {
@@ -24,6 +33,7 @@ function ForgotPassword(): JSX.Element {
       setLoading(true);
       setError('');
       await auth().sendPasswordResetEmail(email);
+      setSuccess(true);
     } catch (e) {
       handleAuthError(e as FirebaseAuthTypes.PhoneAuthError, setError);
     } finally {
@@ -32,7 +42,7 @@ function ForgotPassword(): JSX.Element {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={{backgroundColor: darkTheme.colors.background}}>
       <Paragraph>
         Enter your email address below to send a password reset email:
       </Paragraph>
@@ -44,7 +54,6 @@ function ForgotPassword(): JSX.Element {
         mode="outlined"
         label="Email Address"
         onChangeText={setEmail}
-        theme={inputTheme}
         autoComplete="email"
       />
       <Button
@@ -56,18 +65,7 @@ function ForgotPassword(): JSX.Element {
   );
 }
 
-const inputTheme = {
-  colors: {
-    background: '#fff',
-  },
-};
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-  },
   input: {
     marginVertical: 10,
   },

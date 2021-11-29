@@ -1,9 +1,8 @@
 import {Text} from 'react-native';
 import {createContext, ReactNode, useEffect, useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {Provider} from 'react-native-paper';
-
-import theme from './theme';
+import {Provider as PaperProvider} from 'react-native-paper';
+import {darkTheme} from './theme';
 import SignedInStack from './signed-in/Stack';
 import SignedOutStack from './signed-out/Stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -15,7 +14,7 @@ import {NavigationContainer} from '@react-navigation/native';
 type User = FirebaseAuthTypes.User | null;
 
 /**
- * Context
+ * Contexts
  */
 export const UserContext = createContext<User>(null);
 
@@ -67,9 +66,11 @@ function App(): JSX.Element {
   function container(children: ReactNode | ReactNode[]) {
     return (
       <SafeAreaProvider>
-        <NavigationContainer>
-          <Provider theme={theme}>{children}</Provider>
-        </NavigationContainer>
+        <PaperProvider theme={darkTheme}>
+          <NavigationContainer theme={darkTheme}>
+            {children}
+          </NavigationContainer>
+        </PaperProvider>
       </SafeAreaProvider>
     );
   }
