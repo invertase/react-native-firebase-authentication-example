@@ -25,6 +25,7 @@ function CreateAccount(): JSX.Element {
   useEffect(() => {
     if (error) {
       Alert.alert(appSettings.t('createAccountError'), error);
+      setError('');
     }
   }, [error, appSettings]);
 

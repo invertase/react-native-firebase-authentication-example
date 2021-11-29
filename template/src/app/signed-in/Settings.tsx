@@ -34,6 +34,7 @@ function EditProfile(): JSX.Element | null {
   useEffect(() => {
     if (error) {
       Alert.alert(appSettings.t('userUpdateError'), error);
+      setError('');
     }
     if (passwordSuccess) {
       Alert.alert(appSettings.t('userPasswordChanged'));

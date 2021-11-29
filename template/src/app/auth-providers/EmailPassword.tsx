@@ -18,6 +18,7 @@ function EmailPassword(): JSX.Element {
   useEffect(() => {
     if (error) {
       Alert.alert(appSettings.t('signInError'), error);
+      setError('');
     }
   }, [error, appSettings]);
 

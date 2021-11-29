@@ -18,6 +18,7 @@ function ForgotPassword(): JSX.Element {
   useEffect(() => {
     if (error) {
       Alert.alert(appSettings.t('forgotPasswordError'), error);
+      setError('');
     }
     if (success) {
       Alert.alert(appSettings.t('forgotPasswordSuccess'));
