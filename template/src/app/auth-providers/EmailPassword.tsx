@@ -59,12 +59,10 @@ function EmailPassword(): JSX.Element {
   });
 
   const maskTheme = {
-    dark: true,
+    ...theme,
     colors: {
-      text: '#fff',
-      primary: '#fff',
       background: 'transparent',
-      placeholder: '#fff',
+      primary: theme.colors.text,
     },
   };
 
@@ -77,10 +75,8 @@ function EmailPassword(): JSX.Element {
         }}
       />
       <TextInput
-        autoFocus={true}
         value={email}
         label="Email Address"
-        underlineColor="#fff"
         theme={maskTheme}
         onChangeText={setEmail}
         autoCapitalize="none"
@@ -93,7 +89,6 @@ function EmailPassword(): JSX.Element {
         secureTextEntry
         value={password}
         label="Password"
-        underlineColor="#fff"
         theme={maskTheme}
         onChangeText={setPassword}
         autoComplete="password"

@@ -1,6 +1,6 @@
 import {Fragment} from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
-import {Button, useTheme, withTheme} from 'react-native-paper';
+import {Button, useTheme} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/core';
 import Hero from '../components/Hero';
 import ProviderButton from '../components/AuthProviderButton';
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(SignIn);
+export default SignIn;

@@ -9,7 +9,6 @@ import {
   Subheading,
   useTheme,
   Title,
-  withTheme,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/core';
@@ -77,7 +76,6 @@ function Profile() {
         <Provider type="phone" active={providers.includes('phone')} />
       </View>
       <FAB
-        color="#fff"
         style={[styles.fab, {backgroundColor: theme.colors.primary}]}
         icon="account-settings"
         // @ts-ignore FIXME need to type the navigator
@@ -128,4 +126,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Profile);
+export default Profile;

@@ -8,7 +8,7 @@ import {Fragment, useRef, useState} from 'react';
 import {Alert, StyleSheet} from 'react-native';
 
 import CountryPicker, {Country} from 'react-native-country-picker-modal';
-import {Button, Paragraph, TextInput} from 'react-native-paper';
+import {Button, Paragraph, TextInput, useTheme} from 'react-native-paper';
 
 type ConfirmationRef =
   | ((
@@ -25,6 +25,8 @@ function Phone(): JSX.Element {
   const [countryCode, setCountryCode] = useState('US');
   const [country, setCountry] = useState<Country>();
   const [visible, setVisible] = useState<boolean>(false);
+
+  const theme = useTheme();
 
   const onSelect = (newCountry: Country) => {
     setCountryCode(newCountry.cca2);
@@ -104,6 +106,12 @@ function Phone(): JSX.Element {
       </Paragraph>
       <CountryPicker
         containerButtonStyle={styles.phoneCountry}
+        theme={{
+          primaryColor: theme.colors.surface,
+          primaryColorVariant: theme.colors.surface,
+          backgroundColor: theme.colors.background,
+          onBackgroundTextColor: theme.colors.onSurface,
+        }}
         // @ts-ignore
         countryCode={countryCode}
         {...{

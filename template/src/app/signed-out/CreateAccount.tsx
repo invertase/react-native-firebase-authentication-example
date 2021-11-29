@@ -1,7 +1,13 @@
 import {useEffect, useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {Alert, ScrollView, StyleSheet} from 'react-native';
-import {Button, HelperText, Paragraph, TextInput} from 'react-native-paper';
+import {
+  Button,
+  HelperText,
+  Paragraph,
+  TextInput,
+  useTheme,
+} from 'react-native-paper';
 import {handleAuthError} from '../util/helpers';
 
 function CreateAccount(): JSX.Element {
@@ -12,6 +18,7 @@ function CreateAccount(): JSX.Element {
 
   const [help, setHelp] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const theme = useTheme();
 
   useEffect(() => {
     if (error) {
@@ -40,7 +47,8 @@ function CreateAccount(): JSX.Element {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={[styles.container, {backgroundColor: theme.colors.background}]}>
       <Paragraph>
         Create an account with your email and password. Once created you will be
         automatically logged in to your profile:
@@ -51,11 +59,11 @@ function CreateAccount(): JSX.Element {
         label="Email Address"
         value={email}
         onChangeText={setEmail}
-        theme={inputTheme}
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}
         autoComplete="email"
+        autoFocus={true}
       />
       <TextInput
         secureTextEntry
@@ -64,7 +72,6 @@ function CreateAccount(): JSX.Element {
         label="Password"
         value={password}
         onChangeText={setPassword}
-        theme={inputTheme}
         autoComplete="password"
       />
       <TextInput
@@ -74,7 +81,6 @@ function CreateAccount(): JSX.Element {
         label="Confirm Password"
         value={confirm}
         onChangeText={setConfirm}
-        theme={inputTheme}
         autoComplete="password"
       />
       <HelperText type="error" visible={!!help}>
@@ -82,6 +88,7 @@ function CreateAccount(): JSX.Element {
       </HelperText>
       <Button
         loading={loading}
+        mode="contained"
         disabled={!email || !password || !confirm || !!help}
         onPress={() => (loading ? null : handleCreate())}>
         {loading ? 'Creating Account' : 'Create Account'}
@@ -90,16 +97,9 @@ function CreateAccount(): JSX.Element {
   );
 }
 
-const inputTheme = {
-  colors: {
-    background: '#fff',
-  },
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     padding: 20,
   },
   input: {

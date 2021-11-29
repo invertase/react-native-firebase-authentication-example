@@ -1,9 +1,11 @@
 import {StyleSheet, View} from 'react-native';
+import {useTheme} from 'react-native-paper';
 import Phone from '../auth-providers/Phone';
 
 function PhoneSignIn(): JSX.Element {
+  const theme = useTheme();
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.colors.backdrop}]}>
       <Phone />
     </View>
   );
@@ -12,7 +14,6 @@ function PhoneSignIn(): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     padding: 16,
   },
 });

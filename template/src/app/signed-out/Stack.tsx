@@ -1,5 +1,4 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import {useTheme, withTheme} from 'react-native-paper';
 import CreateAccount from './CreateAccount';
 import ForgotPassword from './ForgotPassword';
 import PhoneSignIn from './PhoneSignIn';
@@ -8,16 +7,8 @@ import SignIn from './SignIn';
 const Stack = createStackNavigator();
 
 function SignedOutStack() {
-  const theme = useTheme();
-
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: theme.colors.primary,
-        },
-        headerTintColor: theme.colors.accent,
-      }}>
+    <Stack.Navigator>
       <Stack.Screen
         name="SignIn"
         component={SignIn}
@@ -42,4 +33,4 @@ function SignedOutStack() {
   );
 }
 
-export default withTheme(SignedOutStack);
+export default SignedOutStack;
