@@ -9,6 +9,9 @@ import {
 import analytics from '@react-native-firebase/analytics';
 import auth from '@react-native-firebase/auth';
 import {translations} from './translations';
+import {darkTheme, defaultTheme} from './theme';
+import {Theme as PaperTheme} from 'react-native-paper/lib/typescript/types';
+import {Theme as NavigationTheme} from '@react-navigation/native';
 
 export type LanguageLocale = {
   languageTag: string;
@@ -20,7 +23,14 @@ export const fallbackLanguageLocale: LanguageLocale = {
   isRTL: false,
 };
 
-export const useAppSettings = () => {
+export type AppSettings = {
+  languageLocale: LanguageLocale | null;
+  t: (key: string, config?: any) => string;
+  colorScheme: string;
+  currentTheme: PaperTheme & NavigationTheme;
+};
+
+export const useAppSettings = (): AppSettings => {
   const [languageLocale, setLanguageLocale] = useState<LanguageLocale | null>(
     null,
   );
@@ -83,5 +93,6 @@ export const useAppSettings = () => {
     languageLocale,
     t: (key: string, config?: any) => i18n.t(key, config),
     colorScheme: colorScheme ?? 'light',
+    currentTheme: colorScheme === 'light' ? defaultTheme : darkTheme,
   };
 };
