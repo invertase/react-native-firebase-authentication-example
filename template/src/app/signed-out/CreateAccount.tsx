@@ -92,7 +92,7 @@ function CreateAccount(): JSX.Element {
         disabled={!email || !password || !confirm || !!help}
         onPress={() => (loading ? null : handleCreate())}>
         {loading
-          ? appSettings.t('createAccountCreationg')
+          ? appSettings.t('createAccountCreating')
           : appSettings.t('createAccountCreate')}
       </Button>
     </ScrollView>
