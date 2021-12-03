@@ -77,11 +77,13 @@ function Google(): JSX.Element | null {
   }
 
   useEffect(() => {
-    GoogleSignin.configure({
-      scopes: ['profile', 'email'],
-      // TODO: Get your web client id from firebase console --> Project Settings --> Auth --> Google Sign-in
-      webClientId: require('../../config.json').webClientId,
-    });
+    if (Platform.OS !== 'web') {
+      GoogleSignin.configure({
+        scopes: ['profile', 'email'],
+        // TODO: Get your web client id from firebase console --> Project Settings --> Auth --> Google Sign-in
+        webClientId: require('../../config.json').webClientId,
+      });
+    }
   }, []);
 
   if (isOnlyProvider) {
