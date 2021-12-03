@@ -61,10 +61,12 @@ function EditProfile(): JSX.Element | null {
 
   async function signOut() {
     setSigningOut(true);
-    await GoogleSignin.signOut();
     await auth().signOut();
+
     if (Platform.OS === 'web') {
       await signOutGoogle();
+    } else {
+      await GoogleSignin.signOut();
     }
   }
 
