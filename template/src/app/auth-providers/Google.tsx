@@ -1,6 +1,6 @@
 import auth from '@react-native-firebase/auth';
 import {useContext, useEffect, useState} from 'react';
-import {Alert} from 'react-native';
+import {Alert, Platform} from 'react-native';
 import {FirebaseError} from '@firebase/util';
 import {
   GoogleSignin,
@@ -9,6 +9,7 @@ import {
 import {UserContext} from '../App';
 import ProviderButton from '../components/AuthProviderButton';
 import {getProviderButtonTitle} from '../util/helpers';
+import {signInWithPopup} from '../../shims/firebase-google-signin-web';
 
 const PROVIDER_ID = 'google.com';
 
@@ -88,7 +89,10 @@ function Google(): JSX.Element | null {
   }
 
   return (
-    <ProviderButton loading={loading} onPress={handleGoogle} type="google">
+    <ProviderButton
+      loading={loading}
+      onPress={Platform.OS === 'web' ? signInWithPopup : handleGoogle}
+      type="google">
       {title}
     </ProviderButton>
   );

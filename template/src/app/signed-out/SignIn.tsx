@@ -51,7 +51,7 @@ function SignIn() {
         />
 
         {Platform.OS !== 'web' && <Facebook />}
-        {Platform.OS !== 'web' && <Google />}
+        <Google />
         {Platform.OS !== 'web' && <Apple />}
         <ProviderButton
           type="phone"

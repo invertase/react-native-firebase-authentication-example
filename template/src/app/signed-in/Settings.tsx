@@ -14,6 +14,7 @@ import {
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useAppSettings} from '../AppSettings';
+import {signOutGoogle} from '../../shims/firebase-google-signin-web';
 
 function EditProfile(): JSX.Element | null {
   const user = auth().currentUser;
@@ -62,6 +63,7 @@ function EditProfile(): JSX.Element | null {
     setSigningOut(true);
     await GoogleSignin.signOut();
     await auth().signOut();
+    await signOutGoogle();
   }
 
   async function handleDisplayName() {
