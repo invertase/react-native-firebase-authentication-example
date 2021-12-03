@@ -1,6 +1,6 @@
 import auth from '@react-native-firebase/auth';
 import {useEffect, useState} from 'react';
-import {Alert, ScrollView, StyleSheet, View} from 'react-native';
+import {Alert, Platform, ScrollView, StyleSheet, View} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {
   Banner,
@@ -63,7 +63,9 @@ function EditProfile(): JSX.Element | null {
     setSigningOut(true);
     await GoogleSignin.signOut();
     await auth().signOut();
-    await signOutGoogle();
+    if (Platform.OS === 'web') {
+      await signOutGoogle();
+    }
   }
 
   async function handleDisplayName() {
