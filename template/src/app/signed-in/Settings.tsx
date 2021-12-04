@@ -1,4 +1,4 @@
-import auth from '@react-native-firebase/auth';
+import auth, {googleWebSignOut} from '@react-native-firebase/auth';
 import {useEffect, useState} from 'react';
 import {Alert, Platform, ScrollView, StyleSheet, View} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -14,7 +14,6 @@ import {
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useAppSettings} from '../AppSettings';
-import {signOutGoogle} from '../../shims/firebase-google-signin-web';
 
 function EditProfile(): JSX.Element | null {
   const user = auth().currentUser;
@@ -64,7 +63,7 @@ function EditProfile(): JSX.Element | null {
     await auth().signOut();
 
     if (Platform.OS === 'web') {
-      await signOutGoogle();
+      await googleWebSignOut();
     } else {
       await GoogleSignin.signOut();
     }
