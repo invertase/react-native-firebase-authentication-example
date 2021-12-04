@@ -1,5 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import {isMobile} from 'react-device-detect';
 
 import {
   GoogleAuthProvider,
@@ -16,10 +17,16 @@ const auth = firebase.auth;
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({prompt: 'select_account'});
 
-export const googleWebSignInWithPopup = async () =>
+const googleWebSignInWithPopup = async () =>
   await signInWithPopup(auth(), provider);
-export const googleWebSignInWithRedirect = async () =>
+const googleWebSignInWithRedirect = async () =>
   await signInWithRedirect(auth(), provider);
+
+export const googleWebSignIn = async () =>
+  isMobile
+    ? await googleWebSignInWithRedirect()
+    : await googleWebSignInWithPopup();
+
 export const googleWebSignOut = async () => await signOut(auth());
 
 export default auth;

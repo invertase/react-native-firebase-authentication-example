@@ -1,4 +1,4 @@
-import auth, {googleWebSignInWithPopup} from '@react-native-firebase/auth';
+import auth, {googleWebSignIn} from '@react-native-firebase/auth';
 import {useContext, useEffect, useState} from 'react';
 import {Alert, Platform} from 'react-native';
 import {FirebaseError} from '@firebase/util';
@@ -24,7 +24,7 @@ function Google(): JSX.Element | null {
     if (!loading) {
       setLoading(true);
       if (Platform.OS === 'web') {
-        await googleWebSignInWithPopup();
+        await googleWebSignIn();
       } else {
         try {
           await GoogleSignin.hasPlayServices();
