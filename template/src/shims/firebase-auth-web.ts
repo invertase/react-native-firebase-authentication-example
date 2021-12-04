@@ -2,7 +2,6 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
 import {
-  getAuth,
   GoogleAuthProvider,
   signInWithPopup,
   signInWithRedirect,
@@ -13,15 +12,14 @@ import initializeApp from './firebase-init';
 initializeApp();
 
 const auth = firebase.auth;
-const firebaseAuth = getAuth();
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({prompt: 'select_account'});
 
 export const googleWebSignInWithPopup = async () =>
-  await signInWithPopup(firebaseAuth, provider);
+  await signInWithPopup(auth(), provider);
 export const googleWebSignInWithRedirect = async () =>
-  await signInWithRedirect(firebaseAuth, provider);
-export const googleWebSignOut = async () => await signOut(firebaseAuth);
+  await signInWithRedirect(auth(), provider);
+export const googleWebSignOut = async () => await signOut(auth());
 
 export default auth;
