@@ -8,7 +8,7 @@ import EmailPassword from '../auth-providers/EmailPassword';
 import Facebook from '../auth-providers/Facebook';
 import Google from '../auth-providers/Google';
 import Apple from '../auth-providers/Apple';
-import {useAppSettings} from '../AppSettings';
+import {useAppSettings} from '../components/AppSettings';
 
 function SignIn() {
   const theme = useTheme();

@@ -1,6 +1,6 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
-import {useAppSettings} from '../AppSettings';
+import {useAppSettings} from '../components/AppSettings';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {App as GettingStarted} from '../../luna-app/App';
 import Profile from './Profile';
@@ -41,12 +41,12 @@ const SignedIn = () => {
   return (
     <TopTabs.Navigator screenOptions={screenOptions}>
       <TopTabs.Screen
-        name="Getting Started"
+        name="Home"
         options={{title: appSettings.t('gettingStarted')}}
         component={GettingStarted}
       />
       <TopTabs.Screen
-        name="User Info"
+        name="UserProfile"
         options={{title: appSettings.t('userInfo')}}
         component={ProfileStack}
       />

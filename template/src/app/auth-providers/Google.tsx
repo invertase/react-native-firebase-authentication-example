@@ -40,39 +40,38 @@ function Google(): JSX.Element | null {
               accessToken,
             );
 
-            if (variant === 'LINK' && user) {
-              await user.linkWithCredential(credential);
-              await user.reload();
-            } else if (variant === 'SIGN_IN') {
-              await auth().signInWithCredential(credential);
+          if (variant === 'LINK' && user) {
+            await user.linkWithCredential(credential);
+            await user.reload();
+          } else if (variant === 'SIGN_IN') {
+            await auth().signInWithCredential(credential);
+          }
+        }
+      } catch (e) {
+        setLoading(false);
+        const error = e as FirebaseError;
+        switch (error.code) {
+          case statusCodes.SIGN_IN_CANCELLED:
+          case '-1':
+            return Alert.alert('Google Auth Canceled');
+          case statusCodes.IN_PROGRESS:
+            return Alert.alert('Google Auth Already In Progress');
+          case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+            return Alert.alert('Google Auth Requires Play Services');
+          default:
+            switch (error.message) {
+              case 'DEVELOPER_ERROR':
+                console.info(
+                  'Developer error during Google Auth, check: ' +
+                    'https://github.com/react-native-google-signin/google-signin/blob/f21dd95a090f4f529748473e20515d6fc66db6bb/example/README.md#developer_error-or-code-10-on-android',
+                );
+                return Alert.alert(
+                  'Google Auth Error',
+                  'Google Auth has not been configured correctly for this app by the developer. More info is available in the console output.',
+                );
+              default:
+                return Alert.alert('Google Auth Error', error.message);
             }
-          }
-        } catch (e) {
-          setLoading(false);
-          const error = e as FirebaseError;
-          switch (error.code) {
-            case statusCodes.SIGN_IN_CANCELLED:
-            case '-1':
-              return Alert.alert('Google Auth Canceled');
-            case statusCodes.IN_PROGRESS:
-              return Alert.alert('Google Auth Already In Progress');
-            case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-              return Alert.alert('Google Auth Requires Play Services');
-            default:
-              switch (error.message) {
-                case 'DEVELOPER_ERROR':
-                  console.info(
-                    'Developer error during Google Auth, check: ' +
-                      'https://github.com/react-native-community/react-native-google-signin/blob/f21dd95a090f4f529748473e20515d6fc66db6bb/example/README.md#developer_error-or-code-10-on-android',
-                  );
-                  return Alert.alert(
-                    'Google Auth Error',
-                    'Google Auth has not been configured correctly for this app by the developer. More info is available in the console output.',
-                  );
-                default:
-                  return Alert.alert('Google Auth Error', error.message);
-              }
-          }
         }
       }
     }
