@@ -3,10 +3,11 @@ import 'firebase/compat/auth';
 import {isMobile} from 'react-device-detect';
 
 import {
+  FacebookAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
   signInWithRedirect,
-  signOut,
+  signOut as signOutFirebase,
 } from 'firebase/auth';
 
 import initializeApp from './firebase-init';
@@ -14,19 +15,34 @@ initializeApp();
 
 const auth = firebase.auth;
 
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({prompt: 'select_account'});
+const facebookProvider = new FacebookAuthProvider();
+facebookProvider.setCustomParameters({
+  display: 'popup',
+});
+
+const facebookWebSignInWithPopup = async () =>
+  await signInWithPopup(auth(), facebookProvider);
+const facebookWebSignInWithRedirect = async () =>
+  await signInWithRedirect(auth(), facebookProvider);
+
+export const facebookWebSignIn = async () =>
+  isMobile
+    ? await facebookWebSignInWithRedirect()
+    : await facebookWebSignInWithPopup();
+
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({prompt: 'select_account'});
 
 const googleWebSignInWithPopup = async () =>
-  await signInWithPopup(auth(), provider);
+  await signInWithPopup(auth(), googleProvider);
 const googleWebSignInWithRedirect = async () =>
-  await signInWithRedirect(auth(), provider);
+  await signInWithRedirect(auth(), googleProvider);
 
 export const googleWebSignIn = async () =>
   isMobile
     ? await googleWebSignInWithRedirect()
     : await googleWebSignInWithPopup();
 
-export const googleWebSignOut = async () => await signOut(auth());
+export const signOutWeb = async () => await signOutFirebase(auth());
 
 export default auth;

@@ -92,8 +92,8 @@ function Profile() {
       />
 
       <View style={styles.center}>
-        {Platform.OS !== 'web' && <Facebook />}
-        {Platform.OS !== 'web' && <Google />}
+        <Facebook />
+        <Google />
         {Platform.OS !== 'web' && <Apple />}
       </View>
     </View>

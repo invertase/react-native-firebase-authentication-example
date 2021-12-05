@@ -1,4 +1,4 @@
-import auth, {googleWebSignOut} from '@react-native-firebase/auth';
+import auth, {signOutWeb} from '@react-native-firebase/auth';
 import {useEffect, useState} from 'react';
 import {Alert, Platform, ScrollView, StyleSheet, View} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -62,12 +62,11 @@ function EditProfile(): JSX.Element | null {
     setSigningOut(true);
 
     if (Platform.OS === 'web') {
-      await googleWebSignOut();
+      await signOutWeb();
     } else {
       await GoogleSignin.signOut();
+      await auth().signOut();
     }
-
-    await auth().signOut();
   }
 
   async function handleDisplayName() {

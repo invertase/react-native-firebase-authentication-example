@@ -50,7 +50,7 @@ function SignIn() {
           style={[styles.divider, {backgroundColor: theme.colors.primary}]}
         />
 
-        {Platform.OS !== 'web' && <Facebook />}
+        <Facebook />
         <Google />
         {Platform.OS !== 'web' && <Apple />}
         <ProviderButton
