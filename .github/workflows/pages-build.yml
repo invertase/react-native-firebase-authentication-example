@@ -15,11 +15,9 @@ jobs:
       - name: Install Packages
         run: cd template && yarn
       - name: Build page
-        run: cd template && yarn build-web
+        run: cd template && PUBLIC_URL=https://invertase.github.io/react-native-firebase-authentication-example yarn build-web yarn build-web
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./template/build
-          tag_name: ${{ steps.prepare_tag.outputs.deploy_tag_name }}
-          tag_message: "Deployment ${{ steps.prepare_tag.outputs.tag_name }}"
