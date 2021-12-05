@@ -1,0 +1,25 @@
+name: Github Pages Deployment
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Install Packages
+        run: cd template && yarn
+      - name: Build page
+        run: cd template && yarn build-web
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          tag_name: ${{ steps.prepare_tag.outputs.deploy_tag_name }}
+          tag_message: "Deployment ${{ steps.prepare_tag.outputs.tag_name }}"
