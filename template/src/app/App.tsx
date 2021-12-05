@@ -1,3 +1,4 @@
+import appJson from '../app.json';
 import {StyleSheet, View} from 'react-native';
 import {createContext, Fragment, ReactNode, useEffect, useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
@@ -102,7 +103,29 @@ function App(): JSX.Element {
     return (
       <SafeAreaProvider>
         <PaperProvider theme={appSettings.currentTheme}>
-          <NavigationContainer theme={appSettings.currentTheme}>
+          <NavigationContainer
+            linking={{
+              prefixes: [
+                'invertase.github.io/react-native-firebase-authenticationi-example',
+                'localhost',
+              ],
+              config: {
+                screens: {
+                  Details: 'details',
+                  UserProfile: 'user/profile',
+                  CreateAccount: 'account/create',
+                  ForgotPassword: 'password/forgot',
+                  PhoneSignIn: 'sign-in/phone',
+                  // Used as catch-all - there is a "Home" in signed-in and signed-out stacks!
+                  home: '*',
+                },
+              },
+            }}
+            documentTitle={{
+              formatter: (options, route) =>
+                `${appJson.displayName} - ${options?.title ?? route?.name}`,
+            }}
+            theme={appSettings.currentTheme}>
             {children}
           </NavigationContainer>
         </PaperProvider>

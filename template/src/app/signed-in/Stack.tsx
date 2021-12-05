@@ -41,12 +41,12 @@ const SignedIn = () => {
   return (
     <TopTabs.Navigator screenOptions={screenOptions}>
       <TopTabs.Screen
-        name="Getting Started"
+        name="Home"
         options={{title: appSettings.t('gettingStarted')}}
         component={GettingStarted}
       />
       <TopTabs.Screen
-        name="User Info"
+        name="UserProfile"
         options={{title: appSettings.t('userInfo')}}
         component={ProfileStack}
       />

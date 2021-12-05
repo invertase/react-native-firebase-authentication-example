@@ -12,7 +12,7 @@ function SignedOutStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="SignIn"
+        name="home"
         component={SignIn}
         options={{headerShown: false, title: appSettings.t('signIn')}}
       />
