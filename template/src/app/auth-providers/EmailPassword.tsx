@@ -65,7 +65,10 @@ function EmailPassword(): JSX.Element {
     ...theme,
     colors: {
       background: 'transparent',
-      primary: theme.colors.text,
+      // primary: theme.colors.text,
+      placeholder: theme.colors.accent,
+      accent: theme.colors.background,
+      text: theme.colors.accent,
     },
   };
 
