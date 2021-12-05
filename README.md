@@ -2,6 +2,8 @@
 
 Thank you for trying the Firebase Authentication example 👏
 
+Just want to try it? [It's live right here. Go play!](https://invertase.github.io/react-native-firebase-authentication-example/)
+
 ![How-its-going](/docs/assets/hero.png)
 
 ![See-it-in-action](/docs/assets/RNFBAuthDemo.gif)

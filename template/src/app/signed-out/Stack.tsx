@@ -1,5 +1,5 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import {useAppSettings} from '../AppSettings';
+import {useAppSettings} from '../components/AppSettings';
 import CreateAccount from './CreateAccount';
 import ForgotPassword from './ForgotPassword';
 import PhoneSignIn from './PhoneSignIn';
@@ -12,7 +12,7 @@ function SignedOutStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="SignIn"
+        name="home"
         component={SignIn}
         options={{headerShown: false, title: appSettings.t('signIn')}}
       />

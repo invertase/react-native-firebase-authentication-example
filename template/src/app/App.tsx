@@ -1,3 +1,4 @@
+import appJson from '../app.json';
 import {StyleSheet, View} from 'react-native';
 import {createContext, Fragment, ReactNode, useEffect, useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
@@ -6,12 +7,11 @@ import {
   ActivityIndicator,
   Provider as PaperProvider,
 } from 'react-native-paper';
-import {darkTheme, defaultTheme} from './theme';
 import SignedInStack from './signed-in/Stack';
 import SignedOutStack from './signed-out/Stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
-import {useAppSettings} from './AppSettings';
+import {useAppSettings} from './components/AppSettings';
 
 /**
  * Types
@@ -75,16 +75,23 @@ function App(): JSX.Element {
       <View
         style={[
           styles.loadingContainer,
-          {backgroundColor: darkTheme.colors.background},
+          {backgroundColor: appSettings.currentTheme.colors.background},
         ]}>
         {!waiting && (
           <Fragment>
-            <Headline style={[styles.padded, {color: darkTheme.colors.text}]}>
+            <Headline
+              style={[
+                styles.padded,
+                {color: appSettings.currentTheme.colors.text},
+              ]}>
               {appSettings.t('loading')}...
             </Headline>
             <ActivityIndicator
               size={'large'}
-              theme={{...darkTheme, colors: {primary: darkTheme.colors.accent}}}
+              theme={{
+                ...appSettings.currentTheme,
+                colors: {primary: appSettings.currentTheme.colors.accent},
+              }}
             />
           </Fragment>
         )}
@@ -95,14 +102,30 @@ function App(): JSX.Element {
   function container(children: ReactNode | ReactNode[]) {
     return (
       <SafeAreaProvider>
-        <PaperProvider
-          theme={
-            appSettings.colorScheme === 'light' ? defaultTheme : darkTheme
-          }>
+        <PaperProvider theme={appSettings.currentTheme}>
           <NavigationContainer
-            theme={
-              appSettings.colorScheme === 'light' ? defaultTheme : darkTheme
-            }>
+            linking={{
+              prefixes: [
+                'invertase.github.io/react-native-firebase-authenticationi-example',
+                'localhost',
+              ],
+              config: {
+                screens: {
+                  Details: 'details',
+                  UserProfile: 'user/profile',
+                  CreateAccount: 'account/create',
+                  ForgotPassword: 'password/forgot',
+                  PhoneSignIn: 'sign-in/phone',
+                  // Used as catch-all - there is a "Home" in signed-in and signed-out stacks!
+                  home: '*',
+                },
+              },
+            }}
+            documentTitle={{
+              formatter: (options, route) =>
+                `${appJson.displayName} - ${options?.title ?? route?.name}`,
+            }}
+            theme={appSettings.currentTheme}>
             {children}
           </NavigationContainer>
         </PaperProvider>

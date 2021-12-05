@@ -9,7 +9,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 import {handleAuthError} from '../util/helpers';
-import {useAppSettings} from '../AppSettings';
+import {useAppSettings} from '../components/AppSettings';
 
 function CreateAccount(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
@@ -92,7 +92,7 @@ function CreateAccount(): JSX.Element {
         disabled={!email || !password || !confirm || !!help}
         onPress={() => (loading ? null : handleCreate())}>
         {loading
-          ? appSettings.t('createAccountCreationg')
+          ? appSettings.t('createAccountCreating')
           : appSettings.t('createAccountCreate')}
       </Button>
     </ScrollView>

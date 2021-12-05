@@ -9,7 +9,7 @@ import {Alert, StyleSheet} from 'react-native';
 
 import CountryPicker, {Country} from 'react-native-country-picker-modal';
 import {Button, Paragraph, TextInput, useTheme} from 'react-native-paper';
-import {useAppSettings} from '../AppSettings';
+import {useAppSettings} from '../components/AppSettings';
 
 type ConfirmationRef =
   | ((

@@ -63,7 +63,7 @@ function Google(): JSX.Element | null {
                 case 'DEVELOPER_ERROR':
                   console.info(
                     'Developer error during Google Auth, check: ' +
-                      'https://github.com/react-native-community/react-native-google-signin/blob/f21dd95a090f4f529748473e20515d6fc66db6bb/example/README.md#developer_error-or-code-10-on-android',
+                      'https://github.com/react-native-google-signin/google-signin/blob/f21dd95a090f4f529748473e20515d6fc66db6bb/example/README.md#developer_error-or-code-10-on-android',
                   );
                   return Alert.alert(
                     'Google Auth Error',

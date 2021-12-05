@@ -19,7 +19,10 @@ import Facebook from '../auth-providers/Facebook';
 import Google from '../auth-providers/Google';
 import Apple from '../auth-providers/Apple';
 import {getProviders} from '../util/helpers';
-import {fallbackLanguageLocale, useAppSettings} from '../AppSettings';
+import {
+  fallbackLanguageLocale,
+  useAppSettings,
+} from '../components/AppSettings';
 require('dayjs/locale/en');
 require('dayjs/locale/es');
 

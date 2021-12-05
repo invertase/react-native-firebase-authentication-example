@@ -13,7 +13,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useAppSettings} from '../AppSettings';
+import {useAppSettings} from '../components/AppSettings';
 
 function EditProfile(): JSX.Element | null {
   const user = auth().currentUser;
