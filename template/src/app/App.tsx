@@ -9,7 +9,10 @@ import {
 } from 'react-native-paper';
 import SignedInStack from './signed-in/Stack';
 import SignedOutStack from './signed-out/Stack';
-import {initialWindowMetrics, SafeAreaProvider} from 'react-native-safe-area-context';
+import {
+  initialWindowMetrics,
+  SafeAreaProvider,
+} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {useAppSettings} from './components/AppSettings';
 
