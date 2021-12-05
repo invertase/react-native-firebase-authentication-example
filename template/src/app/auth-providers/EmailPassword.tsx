@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {Alert, Image, StyleSheet, View} from 'react-native';
 import {Button, TextInput, useTheme} from 'react-native-paper';
 import {handleAuthError} from '../util/helpers';
-import {useAppSettings} from '../AppSettings';
+import {useAppSettings} from '../components/AppSettings';
 
 function EmailPassword(): JSX.Element {
   const [loading, setLoading] = useState(false);

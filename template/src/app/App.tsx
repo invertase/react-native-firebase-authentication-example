@@ -10,7 +10,7 @@ import SignedInStack from './signed-in/Stack';
 import SignedOutStack from './signed-out/Stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
-import {useAppSettings} from './AppSettings';
+import {useAppSettings} from './components/AppSettings';
 
 /**
  * Types

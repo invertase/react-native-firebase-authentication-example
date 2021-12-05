@@ -4,7 +4,7 @@ import {Alert, StyleSheet, View} from 'react-native';
 import {Button, Paragraph, TextInput, useTheme} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/core';
 import {handleAuthError} from '../util/helpers';
-import {useAppSettings} from '../AppSettings';
+import {useAppSettings} from '../components/AppSettings';
 
 function ForgotPassword(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);

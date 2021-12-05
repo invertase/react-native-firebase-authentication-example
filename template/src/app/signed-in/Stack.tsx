@@ -1,6 +1,6 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
-import {useAppSettings} from '../AppSettings';
+import {useAppSettings} from '../components/AppSettings';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {App as GettingStarted} from '../../luna-app/App';
 import Profile from './Profile';

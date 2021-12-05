@@ -9,7 +9,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 import {handleAuthError} from '../util/helpers';
-import {useAppSettings} from '../AppSettings';
+import {useAppSettings} from '../components/AppSettings';
 
 function CreateAccount(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
