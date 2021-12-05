@@ -19,7 +19,7 @@ jobs:
           export REPO_OWNER=`echo $GITHUB_REPOSITORY | cut -d'/' -f1`
           export REPO=`echo $GITHUB_REPOSITORY | cut -d'/' -f2`
           export PUBLIC_URL=https://${REPO_OWNER}.github.io/${REPO}
-          cd template && yarn build-web yarn build-web
+          cd template && yarn build-web
         shell: bash
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
