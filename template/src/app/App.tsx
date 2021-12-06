@@ -111,26 +111,33 @@ function App(): JSX.Element {
             <NavigationContainer
               linking={{
                 prefixes: [
-                  'invertase.github.io/react-native-firebase-authenticationi-example',
+                  'invertase.github.io/react-native-firebase-authentication-example',
                   'localhost',
                 ],
                 config: {
                   screens: {
-                    Details: 'details', // included from Luna template app
-                    User: 'user',
-                    UserProfile: 'profile',
-                    UserSettings: 'profile/edit',
+                    // Our signed-out stack has these:
+                    SignIn: '',
                     CreateAccount: 'account/create',
                     ForgotPassword: 'account/password/forgot',
                     PhoneSignIn: 'account/phone/login',
                     // Used as catch-all - there is a "Home" in signed-in and signed-out stacks!
-                    Home: '*',
+                    NotFound: '*',
+
+                    Details: 'details', // included from Luna template app
+                    User: 'user',
+                    UserProfile: 'profile',
+                    UserSettings: 'profile/edit',
                   },
                 },
               }}
               documentTitle={{
                 formatter: (options, route) =>
-                  `${appJson.displayName} - ${options?.title ?? route?.name}`,
+                  `${appJson.displayName}${
+                    options?.title || route?.name
+                      ? ' - ' + options?.title ?? route?.name
+                      : ' '
+                  }`,
               }}
               theme={appSettings.currentTheme}>
               {children}

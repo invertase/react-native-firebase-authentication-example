@@ -11,6 +11,9 @@ export const english: translation = {
   phoneSignInTitle: 'Phone Sign In',
   signIn: 'Sign In',
 
+  home: 'Home',
+  NotFound: 'Page Not Found',
+  PageNotFoundText: 'Oh, no! This page does not exist.',
   gettingStarted: 'Getting Started',
   userInfo: 'User Info',
   settings: 'Settings',

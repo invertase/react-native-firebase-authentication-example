@@ -11,6 +11,9 @@ export const spanish: translation = {
   phoneSignInTitle: 'Entra con Número de Móvil',
   signIn: 'Entra',
 
+  home: 'Inicio',
+  NotFound: 'Página No encontrada',
+  PageNotFoundText: '¡Oh, no! Esta página no existe.',
   gettingStarted: 'Como Empezar',
   userInfo: 'Usuario',
   settings: 'Configuración',
