@@ -15,6 +15,7 @@ import {
 } from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {useAppSettings} from './components/AppSettings';
+import {AlertsProvider} from 'react-native-paper-alerts';
 
 /**
  * Types
@@ -106,31 +107,35 @@ function App(): JSX.Element {
     return (
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
         <PaperProvider theme={appSettings.currentTheme}>
-          <NavigationContainer
-            linking={{
-              prefixes: [
-                'invertase.github.io/react-native-firebase-authenticationi-example',
-                'localhost',
-              ],
-              config: {
-                screens: {
-                  Details: 'details',
-                  UserProfile: 'user/profile',
-                  CreateAccount: 'account/create',
-                  ForgotPassword: 'password/forgot',
-                  PhoneSignIn: 'sign-in/phone',
-                  // Used as catch-all - there is a "Home" in signed-in and signed-out stacks!
-                  home: '*',
+          <AlertsProvider>
+            <NavigationContainer
+              linking={{
+                prefixes: [
+                  'invertase.github.io/react-native-firebase-authenticationi-example',
+                  'localhost',
+                ],
+                config: {
+                  screens: {
+                    Details: 'details', // included from Luna template app
+                    User: 'user',
+                    UserProfile: 'profile',
+                    UserSettings: 'profile/edit',
+                    CreateAccount: 'account/create',
+                    ForgotPassword: 'account/password/forgot',
+                    PhoneSignIn: 'account/phone/login',
+                    // Used as catch-all - there is a "Home" in signed-in and signed-out stacks!
+                    Home: '*',
+                  },
                 },
-              },
-            }}
-            documentTitle={{
-              formatter: (options, route) =>
-                `${appJson.displayName} - ${options?.title ?? route?.name}`,
-            }}
-            theme={appSettings.currentTheme}>
-            {children}
-          </NavigationContainer>
+              }}
+              documentTitle={{
+                formatter: (options, route) =>
+                  `${appJson.displayName} - ${options?.title ?? route?.name}`,
+              }}
+              theme={appSettings.currentTheme}>
+              {children}
+            </NavigationContainer>
+          </AlertsProvider>
         </PaperProvider>
       </SafeAreaProvider>
     );

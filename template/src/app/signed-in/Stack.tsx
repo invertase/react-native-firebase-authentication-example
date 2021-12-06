@@ -14,12 +14,12 @@ const ProfileStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Profile"
+        name="UserProfile"
         component={Profile}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Settings"
+        name="UserSettings"
         options={{title: appSettings.t('settings')}}
         component={Settings}
       />
@@ -46,7 +46,7 @@ const SignedIn = () => {
         component={GettingStarted}
       />
       <TopTabs.Screen
-        name="UserProfile"
+        name="User"
         options={{title: appSettings.t('userInfo')}}
         component={ProfileStack}
       />

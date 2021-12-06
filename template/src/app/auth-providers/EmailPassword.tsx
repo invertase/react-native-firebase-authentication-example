@@ -1,26 +1,20 @@
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {useEffect, useState} from 'react';
-import {Alert, Image, StyleSheet, View} from 'react-native';
+import {useState} from 'react';
+import {Image, StyleSheet, View} from 'react-native';
 import {Button, TextInput, useTheme} from 'react-native-paper';
-import {handleAuthError} from '../util/helpers';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {useAlerts} from 'react-native-paper-alerts';
+
 import {useAppSettings} from '../components/AppSettings';
 
 function EmailPassword(): JSX.Element {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const theme = useTheme();
   const appSettings = useAppSettings();
-
-  useEffect(() => {
-    if (error) {
-      Alert.alert(appSettings.t('signInError'), error);
-      setError('');
-    }
-  }, [error, appSettings]);
+  const Alert = useAlerts();
 
   async function attemptSignIn() {
     if (!email || !password) {
@@ -29,11 +23,15 @@ function EmailPassword(): JSX.Element {
 
     try {
       setLoading(true);
-      setError('');
       await auth().signInWithEmailAndPassword(email, password);
     } catch (e) {
       setLoading(false);
-      handleAuthError(e as FirebaseAuthTypes.PhoneAuthError, setError);
+      const error = e as FirebaseAuthTypes.PhoneAuthError;
+      Alert.alert(
+        appSettings.t('login-error'),
+        appSettings.t(error.code ?? 'unknownError'),
+        [{text: appSettings.t('OK')}],
+      );
     }
   }
 
@@ -105,7 +103,6 @@ function EmailPassword(): JSX.Element {
         icon="lock"
         mode={loading ? 'text' : 'contained'}
         onPress={() => (loading ? null : attemptSignIn())}
-        // theme={maskTheme}
         loading={loading}>
         {loading
           ? appSettings.t('signInSigningIn')

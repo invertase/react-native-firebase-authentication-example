@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {Alert, ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import {
   Button,
   HelperText,
@@ -8,7 +7,9 @@ import {
   TextInput,
   useTheme,
 } from 'react-native-paper';
-import {handleAuthError} from '../util/helpers';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {useAlerts} from 'react-native-paper-alerts';
+
 import {useAppSettings} from '../components/AppSettings';
 
 function CreateAccount(): JSX.Element {
@@ -16,18 +17,11 @@ function CreateAccount(): JSX.Element {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirm, setConfirm] = useState<string>('');
+  const Alert = useAlerts();
 
   const [help, setHelp] = useState<string>('');
-  const [error, setError] = useState<string>('');
   const theme = useTheme();
   const appSettings = useAppSettings();
-
-  useEffect(() => {
-    if (error) {
-      Alert.alert(appSettings.t('createAccountError'), error);
-      setError('');
-    }
-  }, [error, appSettings]);
 
   useEffect(() => {
     if (password === confirm) {
@@ -40,12 +34,15 @@ function CreateAccount(): JSX.Element {
   async function handleCreate() {
     try {
       setLoading(true);
-      setError('');
       await auth().createUserWithEmailAndPassword(email, password);
     } catch (e) {
-      handleAuthError(e as FirebaseAuthTypes.PhoneAuthError, setError);
-    } finally {
       setLoading(false);
+      const error = e as FirebaseAuthTypes.PhoneAuthError;
+      Alert.alert(
+        appSettings.t('createAccountError'),
+        appSettings.t(error.code ?? 'unknownError'),
+        [{text: appSettings.t('OK')}],
+      );
     }
   }
 
