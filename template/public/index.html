@@ -22,6 +22,10 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
+      input:-webkit-autofill {
+        /* This keeps the autofill background color from clobbering the outline of textinput */
+        margin: 5px;
+      }
     </style>
   </head>
 
