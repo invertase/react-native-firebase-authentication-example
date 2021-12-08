@@ -66,7 +66,7 @@ export const spanish: translation = {
   userDisplayLabel: 'Configuración',
   userNameDisplayLabel: 'Nombre para mostrar',
   userNameDisplayInstructions:
-    'Establecer un nombre de visualización para un saludo personalizado',
+    'Establecer un nombre de visualización para un saludo personalizado.',
   userNameDisplaySave: 'Guardar',
   userNameDisplayUpdatedTitle: 'Nombre para mostrar Cambiado',
   userNameDisplayUpdateMessage: 'Su nombre para mostrar ya esta cambiado',

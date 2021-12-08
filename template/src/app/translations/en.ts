@@ -65,7 +65,7 @@ export const english: translation = {
   userDisplayLabel: 'Display Settings:',
   userNameDisplayLabel: 'Display Name',
   userNameDisplayInstructions:
-    'Set a custom display name for a personalized greeting',
+    'Set a custom display name for a personalized greeting.',
   userNameDisplaySave: 'Save',
   userNameDisplayUpdatedTitle: 'Display Name Changed',
   userNameDisplayUpdateMessage:
