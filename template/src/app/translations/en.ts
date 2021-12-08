@@ -21,7 +21,7 @@ export const english: translation = {
   createAccountError: 'Create Account - Error',
   createAccountPasswordsDifferent: 'Passwords do not match',
   createAccountInstructions:
-    'Create an account with your email and password. Once created you will be automatically logged in to your profile:',
+    'Create an account with your email and password. Once created, you will be automatically logged in to your profile.',
   emailLabel: 'Email Address',
   passwordLabel: 'Password',
   createAccountPasswordConfirmLabel: 'Confirm Password',

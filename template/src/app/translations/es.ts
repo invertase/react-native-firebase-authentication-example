@@ -21,7 +21,7 @@ export const spanish: translation = {
   createAccountError: 'Crea Cuenta - Error',
   createAccountPasswordsDifferent: 'Las contraseñas son diferente',
   createAccountInstructions:
-    'Crea una cuenta con su correo electrónico y contraseña. Una vez creada, entrará automáticamente en su perfil:',
+    'Crea una cuenta con su correo electrónico y contraseña. Una vez creada, entrará automáticamente en su perfil.',
   emailLabel: 'Correo Electrónico',
   passwordLabel: 'Contraseña',
   createAccountPasswordConfirmLabel: 'Confirma Contraseña',
