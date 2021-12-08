@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/main.c48007a7.chunk.js",
-    "main.js.map": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/main.c48007a7.chunk.js.map",
+    "main.js": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/main.bc42e6ab.chunk.js",
+    "main.js.map": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/main.bc42e6ab.chunk.js.map",
     "runtime-main.js": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/runtime-main.ca05484c.js",
     "runtime-main.js.map": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/runtime-main.ca05484c.js.map",
     "static/js/2.318a37b6.chunk.js": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/2.318a37b6.chunk.js",
@@ -25,6 +25,6 @@
   "entrypoints": [
     "static/js/runtime-main.ca05484c.js",
     "static/js/2.318a37b6.chunk.js",
-    "static/js/main.c48007a7.chunk.js"
+    "static/js/main.bc42e6ab.chunk.js"
   ]
 }
