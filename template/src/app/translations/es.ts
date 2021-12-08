@@ -56,7 +56,13 @@ export const spanish: translation = {
   userEmailVerificationInstructions2:
     'Siga las instrucciones para verificar su dirección de correo electrónico',
   userEmailVerificationBanner:
-    'Por favor, verifique su dirección de correo electrónico para utilizar todas las funciones de esta aplicación. Haz clic en el botón de abajo para reenviar un correo electrónico de verificación',
+    'Por favor, verifique su dirección de correo electrónico para utilizar todas las funciones de esta aplicación. Haz clic en el botón re-enviar de abajo para re-enviar un correo electrónico de verificación. Si ya ha verificado, toca el botón re-verificar para actualizar su estado en la app.',
+  userEmailVerifyTitle: 'Verifificación de correo',
+  userEmailVerificationSuccess:
+    'Ha verificado su dirección de correo electrónico con éxito.',
+  userEmailVerificationFailure:
+    'Se parece que su correo no esta verificado. Intenta re-enviar el correo otra vez y sigue las instrucciones en el correo.',
+  userEmailVerificationVerifyButton: 'Re-verify',
   userDisplayLabel: 'Configuración',
   userNameDisplayLabel: 'Nombre para mostrar',
   userNameDisplayInstructions:

@@ -34,6 +34,8 @@ function EditProfile(): JSX.Element | null {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const [updatingUser, setUpdatingUser] = useState(false);
+
   useEffect(() => {
     if (newPassword === confirmPassword) {
       setHelp('');
@@ -79,6 +81,35 @@ function EditProfile(): JSX.Element | null {
     }
   }
 
+  async function updateEmailVerifyStatus() {
+    if (!user || updatingUser) {
+      return;
+    }
+
+    // we will assume success, and only change text on fail or error
+    let dialogText = appSettings.t('userEmailVerificationSuccess');
+    try {
+      setUpdatingUser(true);
+
+      await user.reload();
+      if (!auth().currentUser?.emailVerified) {
+        dialogText = appSettings.t('userEmailVerificationFailure');
+      }
+    } catch (e) {
+      dialogText =
+        appSettings.t('userEmailVerificationFailure') +
+        ': ' +
+        (e as Error).message;
+    } finally {
+      Alert.alert(appSettings.t('userEmailVerifyTitle'), dialogText, [
+        {
+          text: appSettings.t('OK'),
+        },
+      ]);
+      setUpdatingUser(false);
+    }
+  }
+
   async function handlePassword() {
     if (!user || !user.email) {
       return;
@@ -121,6 +152,12 @@ function EditProfile(): JSX.Element | null {
       <Banner
         visible={!user.emailVerified}
         actions={[
+          {
+            label: appSettings.t('userEmailVerificationVerifyButton'),
+            onPress: () => {
+              updateEmailVerifyStatus();
+            },
+          },
           {
             label: appSettings.t('userEmailVerify'),
             onPress: () => {

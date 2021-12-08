@@ -55,7 +55,13 @@ export const english: translation = {
   userEmailVerificationInstructions2:
     'Please follow the instructions to verify your email address',
   userEmailVerificationBanner:
-    'Please verify your email address to use the full features of this app! Click the button below to resend a verification email.',
+    'Please verify your email address to use the full features of this app. Click the re-send button below to re-send the verification email. If you did verify, press re-verify to update your status here.',
+  userEmailVerifyTitle: 'Email Verifification',
+  userEmailVerificationSuccess:
+    'You have successfully verified your email address.',
+  userEmailVerificationFailure:
+    'It appears your email is still not verified. Try re-sending the verification email and following the instructions in the email.',
+  userEmailVerificationVerifyButton: 'Re-verify',
   userDisplayLabel: 'Display Settings:',
   userNameDisplayLabel: 'Display Name',
   userNameDisplayInstructions:

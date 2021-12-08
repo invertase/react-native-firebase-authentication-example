@@ -34,7 +34,11 @@ function CreateAccount(): JSX.Element {
   async function handleCreate() {
     try {
       setLoading(true);
-      await auth().createUserWithEmailAndPassword(email, password);
+      const credential = await auth().createUserWithEmailAndPassword(
+        email,
+        password,
+      );
+      credential.user.sendEmailVerification();
     } catch (e) {
       setLoading(false);
       const error = e as FirebaseAuthTypes.PhoneAuthError;
