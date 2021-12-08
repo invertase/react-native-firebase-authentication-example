@@ -29,7 +29,7 @@ function ForgotPassword(): JSX.Element {
         [
           {
             text: appSettings.t('OK'),
-            onPress: () => linkTo('/home'),
+            onPress: () => linkTo('/'),
           },
         ],
       );
