@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/main.bc42e6ab.chunk.js",
-    "main.js.map": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/main.bc42e6ab.chunk.js.map",
+    "main.js": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/main.cc9acb02.chunk.js",
+    "main.js.map": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/main.cc9acb02.chunk.js.map",
     "runtime-main.js": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/runtime-main.ca05484c.js",
     "runtime-main.js.map": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/runtime-main.ca05484c.js.map",
-    "static/js/2.0d6235ff.chunk.js": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/2.0d6235ff.chunk.js",
-    "static/js/2.0d6235ff.chunk.js.map": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/2.0d6235ff.chunk.js.map",
+    "static/js/2.3921247d.chunk.js": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/2.3921247d.chunk.js",
+    "static/js/2.3921247d.chunk.js.map": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/2.3921247d.chunk.js.map",
     "index.html": "https://invertase.github.io/react-native-firebase-authentication-example/index.html",
-    "static/js/2.0d6235ff.chunk.js.LICENSE.txt": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/2.0d6235ff.chunk.js.LICENSE.txt",
+    "static/js/2.3921247d.chunk.js.LICENSE.txt": "https://invertase.github.io/react-native-firebase-authentication-example/static/js/2.3921247d.chunk.js.LICENSE.txt",
     "static/media/AntDesign.ttf": "https://invertase.github.io/react-native-firebase-authentication-example/static/media/AntDesign.163adab9.ttf",
     "static/media/Entypo.ttf": "https://invertase.github.io/react-native-firebase-authentication-example/static/media/Entypo.a10f4124.ttf",
     "static/media/EvilIcons.ttf": "https://invertase.github.io/react-native-firebase-authentication-example/static/media/EvilIcons.699664b3.ttf",
@@ -24,7 +24,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.ca05484c.js",
-    "static/js/2.0d6235ff.chunk.js",
-    "static/js/main.bc42e6ab.chunk.js"
+    "static/js/2.3921247d.chunk.js",
+    "static/js/main.cc9acb02.chunk.js"
   ]
 }
