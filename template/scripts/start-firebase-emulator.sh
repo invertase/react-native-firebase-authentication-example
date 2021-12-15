@@ -4,7 +4,7 @@ if ! [ -x "$(command -v firebase)" ]; then
   exit 1
 fi
 
-EMU_START_COMMAND="firebase emulators:start --only auth,database,firestore,storage --project rnfirebase-auth-template"
+EMU_START_COMMAND="firebase emulators:start --import=./emulator-data --export-on-exit --project rnfirebase-auth-template"
 #EMU_START_COMMAND="sleep 120"
 MAX_RETRIES=3
 MAX_CHECKATTEMPTS=60
