@@ -9,9 +9,13 @@ import {
 } from 'react-native-paper';
 import SignedInStack from './signed-in/Stack';
 import SignedOutStack from './signed-out/Stack';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {
+  initialWindowMetrics,
+  SafeAreaProvider,
+} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {useAppSettings} from './components/AppSettings';
+import {AlertsProvider} from 'react-native-paper-alerts';
 
 /**
  * Types
@@ -101,33 +105,44 @@ function App(): JSX.Element {
 
   function container(children: ReactNode | ReactNode[]) {
     return (
-      <SafeAreaProvider>
+      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
         <PaperProvider theme={appSettings.currentTheme}>
-          <NavigationContainer
-            linking={{
-              prefixes: [
-                'invertase.github.io/react-native-firebase-authenticationi-example',
-                'localhost',
-              ],
-              config: {
-                screens: {
-                  Details: 'details',
-                  UserProfile: 'user/profile',
-                  CreateAccount: 'account/create',
-                  ForgotPassword: 'password/forgot',
-                  PhoneSignIn: 'sign-in/phone',
-                  // Used as catch-all - there is a "Home" in signed-in and signed-out stacks!
-                  home: '*',
+          <AlertsProvider>
+            <NavigationContainer
+              linking={{
+                prefixes: [
+                  'invertase.github.io/react-native-firebase-authentication-example',
+                  'localhost',
+                ],
+                config: {
+                  screens: {
+                    // Our signed-out stack has these:
+                    SignIn: '',
+                    CreateAccount: 'account/create',
+                    ForgotPassword: 'account/password/forgot',
+                    PhoneSignIn: 'account/phone/login',
+                    // Used as catch-all - there is a "Home" in signed-in and signed-out stacks!
+                    NotFound: '*',
+
+                    Details: 'details', // included from Luna template app
+                    User: 'user',
+                    UserProfile: 'profile',
+                    UserSettings: 'profile/edit',
+                  },
                 },
-              },
-            }}
-            documentTitle={{
-              formatter: (options, route) =>
-                `${appJson.displayName} - ${options?.title ?? route?.name}`,
-            }}
-            theme={appSettings.currentTheme}>
-            {children}
-          </NavigationContainer>
+              }}
+              documentTitle={{
+                formatter: (options, route) =>
+                  `${appJson.displayName}${
+                    options?.title || route?.name
+                      ? ' - ' + options?.title ?? route?.name
+                      : ' '
+                  }`,
+              }}
+              theme={appSettings.currentTheme}>
+              {children}
+            </NavigationContainer>
+          </AlertsProvider>
         </PaperProvider>
       </SafeAreaProvider>
     );

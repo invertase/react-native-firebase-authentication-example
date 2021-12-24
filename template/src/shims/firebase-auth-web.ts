@@ -29,4 +29,8 @@ export const googleWebSignIn = async () =>
 
 export const googleWebSignOut = async () => await signOut(auth());
 
+// Want to do local development?
+// Uncomment this and use `yarn test:emulator:start`
+// auth().useEmulator('http://localhost:9099');
+
 export default auth;

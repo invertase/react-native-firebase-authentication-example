@@ -11,7 +11,8 @@ import {
   Title,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useNavigation} from '@react-navigation/core';
+import {useLinkTo} from '@react-navigation/native';
+
 import {UserContext} from '../App';
 import Hero from '../components/Hero';
 import Provider from '../components/AuthProvider';
@@ -29,8 +30,8 @@ require('dayjs/locale/es');
 function Profile() {
   const theme = useTheme();
   const user = useContext(UserContext);
-  const navigation = useNavigation();
   const appSettings = useAppSettings();
+  const linkTo = useLinkTo();
 
   if (!user) {
     return null;
@@ -90,8 +91,7 @@ function Profile() {
       <FAB
         style={[styles.fab, {backgroundColor: theme.colors.primary}]}
         icon="account-settings"
-        // @ts-ignore FIXME need to type the navigator
-        onPress={() => navigation.navigate('Settings')}
+        onPress={() => linkTo('/profile/edit')}
       />
 
       <View style={styles.center}>

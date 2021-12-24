@@ -1,6 +1,6 @@
-import auth, {googleWebSignOut} from '@react-native-firebase/auth';
 import {useEffect, useState} from 'react';
-import {Alert, Platform, ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import auth, {googleWebSignOut} from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {
   Banner,
@@ -13,14 +13,16 @@ import {
   useTheme,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useAlerts} from 'react-native-paper-alerts';
+
 import {useAppSettings} from '../components/AppSettings';
 
 function EditProfile(): JSX.Element | null {
   const user = auth().currentUser;
   const theme = useTheme();
   const appSettings = useAppSettings();
+  const Alert = useAlerts();
 
-  const [error, setError] = useState('');
   const [signingOut, setSigningOut] = useState(false);
   const [savingName, setSavingName] = useState(false);
   const [displayName, setDisplayName] = useState(
@@ -31,20 +33,8 @@ function EditProfile(): JSX.Element | null {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [passwordSuccess, setPasswordSuccess] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (error) {
-      Alert.alert(appSettings.t('userUpdateError'), error);
-      setError('');
-    }
-    if (passwordSuccess) {
-      Alert.alert(appSettings.t('userPasswordChanged'));
-      setPasswordSuccess(false);
-      // @ts-ignore
-      navigation.navigate('SignIn');
-    }
-  }, [error, passwordSuccess, appSettings]);
+  const [updatingUser, setUpdatingUser] = useState(false);
 
   useEffect(() => {
     if (newPassword === confirmPassword) {
@@ -81,12 +71,48 @@ function EditProfile(): JSX.Element | null {
         await user.updateProfile({
           displayName,
         });
+        Alert.alert(
+          appSettings.t('userNameDisplayUpdatedTitle'),
+          appSettings.t('userNameDisplayUpdateMessage'),
+          [{text: appSettings.t('OK')}],
+        );
         await user.reload();
       } catch (e) {
-        setError((e as Error).message);
+        Alert.alert(appSettings.t('userUpdateError'), (e as Error).message, [
+          {text: appSettings.t('OK')},
+        ]);
       } finally {
         setSavingName(false);
       }
+    }
+  }
+
+  async function updateEmailVerifyStatus() {
+    if (!user || updatingUser) {
+      return;
+    }
+
+    // we will assume success, and only change text on fail or error
+    let dialogText = appSettings.t('userEmailVerificationSuccess');
+    try {
+      setUpdatingUser(true);
+
+      await user.reload();
+      if (!auth().currentUser?.emailVerified) {
+        dialogText = appSettings.t('userEmailVerificationFailure');
+      }
+    } catch (e) {
+      dialogText =
+        appSettings.t('userEmailVerificationFailure') +
+        ': ' +
+        (e as Error).message;
+    } finally {
+      Alert.alert(appSettings.t('userEmailVerifyTitle'), dialogText, [
+        {
+          text: appSettings.t('OK'),
+        },
+      ]);
+      setUpdatingUser(false);
     }
   }
 
@@ -99,9 +125,23 @@ function EditProfile(): JSX.Element | null {
         setSavingPassword(true);
         await auth().signInWithEmailAndPassword(user.email, currentPassword);
         await user.updatePassword(newPassword);
-        setPasswordSuccess(true);
+        Alert.alert(
+          appSettings.t('change-password-successful'),
+          appSettings.t('change-password-successful-message'),
+          [
+            {
+              text: appSettings.t('OK'),
+              // @ts-ignore FIXME type the navigator
+              onPress: async () => await signOut(),
+            },
+          ],
+        );
       } catch (e) {
-        setError((e as Error).message);
+        Alert.alert(
+          appSettings.t('userUpdateError'),
+          appSettings.t('change-password-error'),
+          [{text: appSettings.t('OK')}],
+        );
       } finally {
         setSavingPassword(false);
       }
@@ -119,16 +159,28 @@ function EditProfile(): JSX.Element | null {
         visible={!user.emailVerified}
         actions={[
           {
+            label: appSettings.t('userEmailVerificationVerifyButton'),
+            onPress: () => {
+              updateEmailVerifyStatus();
+            },
+          },
+          {
             label: appSettings.t('userEmailVerify'),
             onPress: () => {
-              user.sendEmailVerification().then(() =>
-                Alert.alert(
-                  appSettings.t('userEmailVerification'),
-                  `${appSettings.t('userEmailVerificationInstructions1')} 
-                    ${user.email}
-                    . ${appSettings.t('userEmailVerificationInstructions2')}.`,
-                ),
-              );
+              user
+                .sendEmailVerification()
+                .then(() =>
+                  Alert.alert(
+                    appSettings.t('userEmailVerification'),
+                    appSettings.t('userEmailVerificationInstructions1') +
+                      ' "' +
+                      user.email +
+                      '". ' +
+                      appSettings.t('userEmailVerificationInstructions2') +
+                      '.',
+                    [{text: appSettings.t('OK')}],
+                  ),
+                );
             },
           },
         ]}

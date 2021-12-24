@@ -1,7 +1,7 @@
 import {Fragment} from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
 import {Button, useTheme} from 'react-native-paper';
-import {useNavigation} from '@react-navigation/core';
+import {useLinkTo} from '@react-navigation/native';
 import Hero from '../components/Hero';
 import ProviderButton from '../components/AuthProviderButton';
 import EmailPassword from '../auth-providers/EmailPassword';
@@ -12,8 +12,8 @@ import {useAppSettings} from '../components/AppSettings';
 
 function SignIn() {
   const theme = useTheme();
-  const navigation = useNavigation();
   const appSettings = useAppSettings();
+  const linkTo = useLinkTo();
 
   return (
     <Fragment>
@@ -29,8 +29,7 @@ function SignIn() {
         <Button
           color="#9e9e9e"
           onPress={() => {
-            // @ts-ignore FIXME need to type the navigator
-            return navigation.navigate('ForgotPassword');
+            linkTo('/account/password/forgot');
           }}
           style={styles.button}>
           {appSettings.t('forgotPassword')}
@@ -39,8 +38,7 @@ function SignIn() {
           mode="contained"
           icon="plus"
           onPress={() => {
-            // @ts-ignore FIXME need to type the navigator
-            return navigation.navigate('CreateAccount');
+            linkTo('/account/create');
           }}
           style={styles.button}>
           {appSettings.t('createAnAccount')}
@@ -56,8 +54,7 @@ function SignIn() {
         <ProviderButton
           type="phone"
           onPress={() => {
-            // @ts-ignore FIXME need to type the navigator
-            return navigation.navigate('PhoneSignIn');
+            linkTo('/account/phone/login');
           }}>
           {appSettings.t('phoneSignIn')}
         </ProviderButton>

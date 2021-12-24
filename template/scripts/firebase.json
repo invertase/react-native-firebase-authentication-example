@@ -1,0 +1,71 @@
+{
+  "database": {
+    "rules": "database.rules"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": {
+    "predeploy": [
+      "yarn --prefix \"$RESOURCE_DIR\" lint",
+      "yarn --prefix \"$RESOURCE_DIR\" build"
+    ],
+    "source": "functions"
+  },
+  "hosting": [
+    {
+      "target": "public",
+      "public": "../build",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "headers": [
+        {
+          "source": "**/*",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=300"
+            }
+          ]
+        }
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ],
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "auth": {
+      "port": "9099"
+    },
+    "database": {
+      "port": "9000"
+    },
+    "firestore": {
+      "port": "8080"
+    },
+    "functions": {
+      "port": "5001"
+    },
+    "hosting": {
+      "port": "5000",
+      "host": "0.0.0.0"
+    },
+    "pubsub": {
+      "port": "8085"
+    },
+    "storage": {
+      "port": "9199"
+    },
+    "ui": {
+      "enabled": true,
+      "port": 4000
+    }
+  }
+}
