@@ -1,12 +1,15 @@
-import auth, {googleWebSignIn} from '@react-native-firebase/auth';
 import {useContext, useEffect, useState} from 'react';
-import {Alert, Platform} from 'react-native';
+import auth, {googleWebSignIn} from '@react-native-firebase/auth';
+import {Platform} from 'react-native';
 import {FirebaseError} from '@firebase/util';
+import {useAlerts} from 'react-native-paper-alerts';
 import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+
 import {UserContext} from '../App';
+import {useAppSettings} from '../components/AppSettings';
 import ProviderButton from '../components/AuthProviderButton';
 import {getProviderButtonTitle} from '../util/helpers';
 
@@ -15,6 +18,9 @@ const PROVIDER_ID = 'google.com';
 function Google(): JSX.Element | null {
   const [loading, setLoading] = useState(false);
   const user = useContext(UserContext);
+  const Alert = useAlerts();
+  const appSettings = useAppSettings();
+
   const {isOnlyProvider, title, variant} = getProviderButtonTitle(
     user,
     PROVIDER_ID,
@@ -28,7 +34,6 @@ function Google(): JSX.Element | null {
       } else {
         try {
           await GoogleSignin.hasPlayServices();
-
           if (variant === 'UNLINK' && user) {
             await user.unlink(PROVIDER_ID);
             await user.reload();
@@ -39,7 +44,6 @@ function Google(): JSX.Element | null {
               idToken,
               accessToken,
             );
-
             if (variant === 'LINK' && user) {
               await user.linkWithCredential(credential);
               await user.reload();
@@ -53,11 +57,23 @@ function Google(): JSX.Element | null {
           switch (error.code) {
             case statusCodes.SIGN_IN_CANCELLED:
             case '-1':
-              return Alert.alert('Google Auth Canceled');
+              return Alert.alert(
+                appSettings.t('googleAuthError'),
+                appSettings.t('googleAuthCancelled'),
+                [{text: appSettings.t('OK')}],
+              );
             case statusCodes.IN_PROGRESS:
-              return Alert.alert('Google Auth Already In Progress');
+              return Alert.alert(
+                appSettings.t('googleAuthError'),
+                appSettings.t('googleAuthInProgress'),
+                [{text: appSettings.t('OK')}],
+              );
             case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-              return Alert.alert('Google Auth Requires Play Services');
+              return Alert.alert(
+                appSettings.t('googleAuthError'),
+                appSettings.t('googleAuthPlayServices'),
+                [{text: appSettings.t('OK')}],
+              );
             default:
               switch (error.message) {
                 case 'DEVELOPER_ERROR':
@@ -66,11 +82,17 @@ function Google(): JSX.Element | null {
                       'https://github.com/react-native-google-signin/google-signin/blob/f21dd95a090f4f529748473e20515d6fc66db6bb/example/README.md#developer_error-or-code-10-on-android',
                   );
                   return Alert.alert(
-                    'Google Auth Error',
-                    'Google Auth has not been configured correctly for this app by the developer. More info is available in the console output.',
+                    appSettings.t('googleAuthError'),
+                    appSettings.t('googleAuthConfigError'),
+                    [{text: appSettings.t('OK')}],
                   );
                 default:
-                  return Alert.alert('Google Auth Error', error.message);
+                  // TODO get catalog of all errors and translate them
+                  return Alert.alert(
+                    appSettings.t('googleAuthError'),
+                    error.message,
+                    [{text: appSettings.t('OK')}],
+                  );
               }
           }
         }

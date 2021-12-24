@@ -1,18 +1,19 @@
 import {createStackNavigator} from '@react-navigation/stack';
+
 import {useAppSettings} from '../components/AppSettings';
 import CreateAccount from './CreateAccount';
 import ForgotPassword from './ForgotPassword';
 import PhoneSignIn from './PhoneSignIn';
 import SignIn from './SignIn';
-
+import {NotFound} from '../components/NotFound';
 const Stack = createStackNavigator();
 
 function SignedOutStack() {
   const appSettings = useAppSettings();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="home">
       <Stack.Screen
-        name="home"
+        name="SignIn"
         component={SignIn}
         options={{headerShown: false, title: appSettings.t('signIn')}}
       />
@@ -30,6 +31,11 @@ function SignedOutStack() {
         name="PhoneSignIn"
         component={PhoneSignIn}
         options={{title: appSettings.t('phoneSignInTitle')}}
+      />
+      <Stack.Screen
+        name="NotFound"
+        component={NotFound}
+        options={{title: appSettings.t('NotFound')}}
       />
     </Stack.Navigator>
   );

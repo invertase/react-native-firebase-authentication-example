@@ -1,13 +1,16 @@
+import {useContext, useState} from 'react';
+import {Platform, StyleSheet} from 'react-native';
 import {FirebaseError} from '@firebase/util';
 import auth from '@react-native-firebase/auth';
-import {useContext, useState} from 'react';
-import {Alert, Platform, StyleSheet} from 'react-native';
 import appleAuth, {
   AppleButton,
   AppleRequestOperation,
   AppleRequestScope,
 } from '@invertase/react-native-apple-authentication';
+import {useAlerts} from 'react-native-paper-alerts';
+
 import {UserContext} from '../App';
+import {useAppSettings} from '../components/AppSettings';
 import {getProviderButtonTitle} from '../util/helpers';
 
 const PROVIDER_ID = 'apple.com';
@@ -15,6 +18,8 @@ const PROVIDER_ID = 'apple.com';
 function Apple(): JSX.Element | null {
   const [loading, setLoading] = useState(false);
   const user = useContext(UserContext);
+  const Alert = useAlerts();
+  const appSettings = useAppSettings();
 
   if (Platform.OS !== 'ios') {
     return null;
@@ -54,17 +59,20 @@ function Apple(): JSX.Element | null {
             }
           } else {
             Alert.alert(
-              'Apple Auth Error',
-              'Unable to obtain an identity token from Apple.',
+              appSettings.t('appleAuthErrorTitle'),
+              appSettings.t('appleAuthErrorMessage'),
+              [{text: appSettings.t('OK')}],
             );
           }
         }
       } catch (e) {
         setLoading(false);
         const error = e as FirebaseError;
-        // TODO: handle possible cases
         if (error.code !== '1001') {
-          Alert.alert('Apple Auth Error', error.message);
+          // TODO: translate all possible cases - just sending through raw now
+          Alert.alert(appSettings.t('appleAuthErrorTitle'), error.message, [
+            {text: appSettings.t('OK')},
+          ]);
         }
       }
     }

@@ -5,10 +5,11 @@ import {
   parsePhoneNumberFromString,
 } from 'libphonenumber-js';
 import {Fragment, useRef, useState} from 'react';
-import {Alert, StyleSheet} from 'react-native';
-
+import {StyleSheet} from 'react-native';
 import CountryPicker, {Country} from 'react-native-country-picker-modal';
 import {Button, Paragraph, TextInput, useTheme} from 'react-native-paper';
+import {useAlerts} from 'react-native-paper-alerts';
+
 import {useAppSettings} from '../components/AppSettings';
 
 type ConfirmationRef =
@@ -29,6 +30,7 @@ function Phone(): JSX.Element {
 
   const theme = useTheme();
   const appSettings = useAppSettings();
+  const Alert = useAlerts();
 
   const onSelect = (newCountry: Country) => {
     setCountryCode(newCountry.cca2);
@@ -42,10 +44,15 @@ function Phone(): JSX.Element {
       try {
         const result = await auth().signInWithPhoneNumber(number);
         confirmationRef.current = result.confirm.bind(result);
-      } catch (error) {
+      } catch (e) {
         setLoading(false);
         confirmationRef.current = null;
-        Alert.alert(appSettings.t('phoneAuthError'), (error as Error).message);
+        const error = e as FirebaseAuthTypes.PhoneAuthError;
+        Alert.alert(
+          appSettings.t('phone-auth-error'),
+          appSettings.t(error.code ?? 'unknownError'),
+          [{text: appSettings.t('OK')}],
+        );
       }
     }
   }
@@ -73,10 +80,12 @@ function Phone(): JSX.Element {
       try {
         await confirmationRef.current(verification);
         confirmationRef.current = null;
-      } catch (error) {
+      } catch (e) {
+        const error = e as FirebaseAuthTypes.PhoneAuthError;
         Alert.alert(
-          appSettings.t('phoneVerificationError'),
-          (error as Error).message,
+          appSettings.t('phone-auth-error'),
+          appSettings.t(error.code ?? 'unknownError'),
+          [{text: appSettings.t('OK')}],
         );
       } finally {
         setLoading(false);

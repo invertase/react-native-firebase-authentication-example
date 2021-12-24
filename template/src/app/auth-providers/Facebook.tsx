@@ -1,8 +1,11 @@
-import auth, {facebookWebSignIn} from '@react-native-firebase/auth';
 import {useContext, useState} from 'react';
-import {Alert, Platform} from 'react-native';
+import {Platform} from 'react-native';
+import auth, {facebookWebSignIn} from '@react-native-firebase/auth';
 import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
+import {useAlerts} from 'react-native-paper-alerts';
+
 import {UserContext} from '../App';
+import {useAppSettings} from '../components/AppSettings';
 import ProviderButton from '../components/AuthProviderButton';
 import {getProviderButtonTitle} from '../util/helpers';
 
@@ -11,6 +14,8 @@ const PROVIDER_ID = 'facebook.com';
 function Facebook(): JSX.Element | null {
   const [loading, setLoading] = useState(false);
   const user = useContext(UserContext);
+  const Alert = useAlerts();
+  const appSettings = useAppSettings();
 
   const {isOnlyProvider, title, variant} = getProviderButtonTitle(
     user,
@@ -34,13 +39,15 @@ function Facebook(): JSX.Element | null {
             ]);
 
             if (isCancelled) {
-              Alert.alert('Facebook Auth Canceled');
+              Alert.alert(
+                appSettings.t('facebookAuthError'),
+                appSettings.t('facebookAuthCancelled'),
+                [{text: appSettings.t('OK')}],
+              );
             } else {
               const result = await AccessToken.getCurrentAccessToken();
               if (!result) {
-                throw new Error(
-                  'No Access Token was returned from Facebook SDK.',
-                );
+                throw new Error(appSettings.t('facebookAuthErrorMessage'));
               }
 
               const {accessToken} = result;
@@ -58,7 +65,12 @@ function Facebook(): JSX.Element | null {
           }
         } catch (error) {
           setLoading(false);
-          Alert.alert('Facebook Auth Error', (error as Error).message);
+          // TODO catalog error messages and translate. Passing raw now
+          Alert.alert(
+            appSettings.t('facebookAuthError'),
+            (error as Error).message,
+            [{text: appSettings.t('OK')}],
+          );
         }
       }
     }
