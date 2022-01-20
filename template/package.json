@@ -9,7 +9,7 @@
     "start": "react-native start",
     "web": "craco start",
     "build-web": "craco build",
-    "test:emulator:start": "cd ./scripts && ./start-firebase-emulator.sh --no-daemon",
+    "test:emulator:start": "cd ./scripts/functions && yarn && yarn build && cd .. && ./start-firebase-emulator.sh --no-daemon",
     "test:emulator:start-ci": "cd ./scripts && ./start-firebase-emulator.sh",
     "test:all": "yarn test:jest",
     "test:jest": "jest",
