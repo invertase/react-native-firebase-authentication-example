@@ -81,6 +81,7 @@ function CreateAccount(): JSX.Element {
         mode="outlined"
         label={appSettings.t('createAccountPasswordConfirmLabel')}
         value={confirm}
+        error={!!confirm && password !== confirm}
         onChangeText={setConfirm}
         autoComplete="password"
       />
