@@ -1,15 +1,7 @@
-import {FBAccessToken} from 'react-native-fbsdk-next/types/FBAccessToken';
-import {LoginResult} from 'react-native-fbsdk-next/types/FBLoginManager';
-
-export class AccessToken {
-  async logInWithPermissions(): Promise<LoginResult> {
-    console.log('facebook trying to login');
-    return {isCancelled: true};
-  }
-}
+import {AccessToken} from 'react-native-fbsdk-next';
 
 export class LoginManager {
-  async getCurrentAccessToken(): Promise<FBAccessToken | null> {
+  async getCurrentAccessToken(): Promise<AccessToken | null> {
     console.log('facebook trying to get current access token');
     return null;
   }
