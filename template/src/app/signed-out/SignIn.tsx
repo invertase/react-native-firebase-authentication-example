@@ -48,8 +48,8 @@ function SignIn() {
           style={[styles.divider, {backgroundColor: theme.colors.primary}]}
         />
 
-        {Platform.OS !== 'web' && <Facebook />}
-        {Platform.OS !== 'web' && <Google />}
+        <Facebook />
+        <Google />
         {Platform.OS !== 'web' && <Apple />}
         <ProviderButton
           type="phone"

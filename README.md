@@ -29,10 +29,10 @@ and the following providers:
 - Email / Password Sign In
 - Phone Auth via SMS
 - Apple (Native, iOS only, PRs needed for web support)
-- Facebook (Native only, PRs needed for web support)
-- Google (Native only, PRs needed for web support)
+- Facebook (limited web support, expect breaking changes)
+- Google (limited web support, expect breaking changes)
 
-This template creates an app that comes out of the box ready with [typescript](https://www.typescriptlang.org/) and [react-native-web](https://necolas.github.io/react-native-web/) support, based on [the Luna template](https://github.com/plaut-ro/luna#readme)
+This template creates an app that comes out of the box ready with [typescript](https://www.typescriptlang.org/) and [react-native-web](https://necolas.github.io/react-native-web/) support, based on [the 🌒 Luna template](https://github.com/plaut-ro/luna#readme)
 
 This template also has single-source theme configuration and light/dark switching configured to follow system preference, as well as dynamic detection of user locale and an included translation system (English and Spanish translations to demonstrate how it works)
 
@@ -44,7 +44,7 @@ Ensure your development environment is set up for React Native by following the 
 
 ### Create an app using the template
 
-1. For a quick demonstration, this template is pre-configured with a firebase project called `ProjectName`, if you just want to see it work, run `npx react-native init ProjectName --template invertase/react-native-firebase-authentication-example
+1. For a quick demonstration, this template is pre-configured with a firebase project called `ProjectName`, if you just want to see it work, run `npx react-native init ProjectName --template invertase/react-native-firebase-authentication-example`
 1. For a real project, replace `ProjectName` in the init command with your new project's real name, then follow the configuration instructions below
 
 ### Android: Setting up App Signing
