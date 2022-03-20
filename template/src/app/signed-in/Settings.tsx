@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import auth from '@react-native-firebase/auth';
+import {Platform, ScrollView, StyleSheet, View} from 'react-native';
+import auth, {googleWebSignOut} from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {
   Banner,
@@ -50,7 +50,13 @@ function EditProfile(): JSX.Element | null {
 
   async function signOut() {
     setSigningOut(true);
-    await GoogleSignin.signOut();
+
+    if (Platform.OS === 'web') {
+      await googleWebSignOut();
+    } else {
+      await GoogleSignin.signOut();
+    }
+
     await auth().signOut();
   }
 

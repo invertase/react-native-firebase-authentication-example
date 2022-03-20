@@ -41,6 +41,7 @@
     "i18n-js": "^3.8.0",
     "libphonenumber-js": "^1.9.49",
     "react": "^17.0.2",
+    "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.2",
     "react-native": "^0.67.3",
     "react-native-country-picker-modal": "^2.0.0",
